@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#jogo{
+    display: flex;
+    margin: 10px;
+    width: 1080px;
+    height: 720px;
+    background-image: url("/imagens/mapaHerois2020.png");
+}
+#jogo .irPara{
+    position:relative;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    border: 0 ;
+}
+#jogo .irPara img{
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+}
+#jogo #irPara_Denji{
+    bottom: -57%;
+    right: -48%;
+}

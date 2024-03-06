@@ -96,6 +96,8 @@ const atributoPrincipal = document.querySelector("#atributoPrincipal");
 const atributoSecundario = document.querySelector("#atributoSecundario");
 
 const criar_prota = document.querySelector("#criar-prota");
+const display_criacao = document.querySelector("#criacao-de-personagem");
+const display_jogo = document.querySelector("#jogo");
 
 function build_prota(){
     if(atributoPrincipal.value != "selecionePricipal" && atributoSecundario.value != "selecioneSecundario"  && nick.value != ""){
@@ -110,6 +112,8 @@ function build_prota(){
                 
                 const protagonista = new personagem(nick.value,1,atributos);
                 console.log(protagonista);
+                display_criacao.style.display = "none";
+                display_jogo.style.display = "flex";
             }else{
                 alert("Use todos os pontos de atributos!")
             }
