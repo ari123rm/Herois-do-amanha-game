@@ -98,7 +98,7 @@ const atributoSecundario = document.querySelector("#atributoSecundario");
 const criar_prota = document.querySelector("#criar-prota");
 
 function build_prota(){
-    if(atributoPrincipal.value != "selecionePricipal" && atributoSecundario.value != "selecionePricipal"  && nick.value != ""){
+    if(atributoPrincipal.value != "selecionePricipal" && atributoSecundario.value != "selecioneSecundario"  && nick.value != ""){
         if(atributoPrincipal.value != atributoSecundario.value){
                 if(parseInt(points.innerText) == 0){
                 let atributos = [];
