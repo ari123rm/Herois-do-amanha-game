@@ -1,16 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
 #criacao-de-personagem{
-    display: inline-block;
+    display: grid;
     text-align: center;
+    background-color: aquamarine;
+    padding-bottom: 10px;
+}
+#criacao-de-personagem  h2{
+    text-align: left;
+    margin-left: 20px;
+}
+#criacao-de-personagem #personalizacao{
+    display:flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#criacao-de-personagem #personalizacao #nickname{
+    width: 350px;
+    font-size: 16px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 0;
+    text-align: center;
+}
+#criacao-de-personagem #personalizacao #atributoPricipal{
+    width: max-content;
+
+
+}
+#criacao-de-personagem #personalizacao #atributoSecundario{
+    width: max-content;
+
+
+}
+#criacao-de-personagem label{
+    text-align: center;
+    justify-content: center;
+    display: flex;
+}
+#criacao-de-personagem label h2{
+    text-align: center;
+    justify-content: center;
+    display: flex;
 }
 #distribuicaoAtributos{
     display: flex;
     justify-content: center;
+
 }
 #distribuicaoAtributos .atributos{
     margin: 20px;
     justify-content: center;
     border-radius: 20px;
     border: 2px solid black;
+    background-color: cadetblue;
     width: 100px;
     height: 100px;
     padding: 10px;
@@ -24,6 +72,14 @@
     text-align: center;
     justify-content: center;
 }
+#distribuicaoAtributos .atributos .butaoAtributos .displayAtributos{
+    display: block;
+    justify-content: center;
+}
+#distribuicaoAtributos .atributos .butaoAtributos .displayAtributos .valorAtributo{
+    display: inline-block;
+
+}
 #distribuicaoAtributos .atributos  .butaoAtributos p{
     font-size: 20px;
     font-weight: bolder;
@@ -32,6 +88,8 @@
     margin-top:0 ;
     margin-left: 10px;
     margin-right: 10px;
+    margin-bottom: 5px;
+    width: 45px;
 }
 #distribuicaoAtributos .atributos  .butaoAtributos button{
     text-align: center;

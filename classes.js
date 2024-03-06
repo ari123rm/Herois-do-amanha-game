@@ -45,22 +45,22 @@ class personagem{
 
 
     get modFor(){
-        return Math.floor(this.forca-10)/2;
+        return Math.floor((this.forca-10)/2);
     }
     get modDex(){
-        return Math.floor(this.destreza-10)/2;
+        return Math.floor((this.destreza-10)/2);
     }
     get modCon(){
-        return Math.floor(this.constituicao-10)/2;
+        return Math.floor((this.constituicao-10)/2);
     }
     get modInt(){
-        return Math.floor(this.inteligencia-10)/2;
+        return Math.floor((this.inteligencia-10)/2);
     }
     get modSab(){
-        return Math.floor(this.sabedoria-10)/2;
+        return Math.floor((this.sabedoria-10)/2);
     }
     get modCar(){
-        return Math.floor(this.carisma-10)/2;
+        return Math.floor((this.carisma-10)/2);
     }
 }
 
