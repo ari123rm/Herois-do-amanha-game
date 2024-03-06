@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Joguinho do Heróis</title>
     <link rel="stylesheet" href="./criacao.css">
     <link rel="stylesheet" href="./jogo.css">
+    <!-- Fontes das falas do jogo -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">   
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Madimi+One&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -121,11 +125,26 @@
             </ul>
             <button id = "criar-prota">Começar!</button>
         </div>
-        <div id = "jogo">
-            <button id = "irPara_Denji" class = "irPara"><img src="imagens/denji/token_2.webp" alt=""></button>
+        <div id = "display-jogo">
+            <div id = "jogo">
+                <div id = "inicio-mapa">
+                    <button id = "irPara_Denji" class = "irPara"><img src="imagens/denji/token_2.webp" alt=""></button>
+                </div>
+                <div id = "falas">
+                    <p id = "textoFala">Olá, sou Denji!!! Gosto de peitos!</p>
+                    <div id = "escolhas">
+                        <button id ="escolha-1">escolha 1</button>
+                        <button id = "escolha-2">escolha 2</button>
+                        <button id = "escolha-3">escolha 3</button>
+                    </div>
+                </div>
+            </div>
         </div>
+        
     </main>
 </body>
-<script type = "module" src="./criacao.js"></script>
-<script type = "module" src="./classes.js"></script>
+<script type="module" src="/js/jogo.js"></script>
+    <script type="module" src="/js/personagens/irDenji.js"></script>
+<script type = "module" src="/js/criacao.js"></script>
+<script type = "module" src="/js/classes.js"></script>
 </html>
