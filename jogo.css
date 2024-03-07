@@ -5,10 +5,29 @@
 #display-jogo{
     justify-content: center;
     display: flex;
+    margin: 10px;
+}
+#abrir-inventario{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    position: absolute;
+    right: 2%;
+    top:2%;
+    border: 1px solid darkslategrey;
+}
+
+#abrir-inventario img{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
+#abrir-inventario:hover img{
+    filter:grayscale(0.5);
 }
 #jogo{
-    display: flex;
-    margin: 10px;
+    display: none; /* flex*/
+
     width: 1080px;
     height: 720px;
     position: absolute;
@@ -28,6 +47,17 @@
     width: 50px;
     border-radius: 100%;
     border: 0 ;
+    background-color: cyan;
+}
+#jogo .irPara:hover{
+    height: 52px;
+    width: 52px;
+
+}
+#jogo .irPara:hover img{
+    height: 52px;
+    width: 52px;
+    filter:grayscale(0.5);
 }
 #jogo .irPara img{
     height: 50px;
@@ -38,6 +68,20 @@
     bottom: -38%;
     right: -22%;
 }
+
+#sprites{
+    display: none;
+    width: 100%;
+    height: 70%;
+    justify-content: center;
+    bottom: 0;
+
+}
+
+
+
+
+
 .madimi-one-regular {
     font-family: "Madimi One", sans-serif;
     font-weight: 400;
@@ -60,18 +104,18 @@
     position: absolute;
     text-align: center;
     align-items: center;
-    bottom:50%;
+    top:5%;
     width: 100%;
     
 }
 #falas #escolhas{
     bottom: 0;
     display: flex;
-    height: 20%;
+    height: 45%;
     position: absolute;
     opacity: 100%;
     width: 100%;
-    margin-bottom: 5px;
+    border-top: 1px solid black;
 }
 #falas #escolhas button{
     bottom: 0;
@@ -79,8 +123,11 @@
     font-size: 32px;
     font-family: "Madimi One";
     color: black;
-    background-color:lightgoldenrodyellow ;
+    background-color:lightblue;
     border: 0;
     font-style: italic;
     text-decoration:underline ;
+}
+#falas #escolhas button:hover{
+    background-color:lightseagreen;
 }

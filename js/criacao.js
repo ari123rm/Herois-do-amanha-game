@@ -57,7 +57,7 @@ diminuirCar.onclick = () =>{
     const aumentarSab = document.querySelector("#aumentarSab");
     const aumentarCar = document.querySelector("#aumentarCar");
     function aumentar_Atributo(index){
-        if(parseInt(valorAtributo[index].innerText) < 15 && parseInt(points.innerText) > 0){
+        if(parseInt(valorAtributo[index].innerText) < 15 && ((parseInt(points.innerText) > 0 && valorAtributo[index].innerText < 13 ) || (valorAtributo[index].innerText >= 13 &&parseInt(points.innerText) > 1 ))){
             valorAtributo[index].innerText = parseInt(valorAtributo[index].innerText) + 1 ;
             modificadores[index].innerText = Math.floor((parseInt(valorAtributo[index].innerText) - 10)/2);
             if(Math.floor((parseInt(valorAtributo[index].innerText) - 10)/2) > 0){
@@ -94,13 +94,15 @@ diminuirCar.onclick = () =>{
 
 const atributoPrincipal = document.querySelector("#atributoPrincipal");
 const atributoSecundario = document.querySelector("#atributoSecundario");
-
+const atributoGenero = document.querySelector("#atributoGenero");
 const criar_prota = document.querySelector("#criar-prota");
 const display_criacao = document.querySelector("#criacao-de-personagem");
 const display_jogo = document.querySelector("#jogo");
 
+//prota teste
+const protagonista = [new personagem("Teste",15,[10,10,10,10,10,10],'M')];
 function build_prota(){
-    if(atributoPrincipal.value != "selecionePricipal" && atributoSecundario.value != "selecioneSecundario"  && nick.value != ""){
+    if(atributoPrincipal.value != "selecionePricipal" && atributoSecundario.value != "selecioneSecundario"  && nick.value != "" && atributoGenero.value != "selecioneGenero"){
         if(atributoPrincipal.value != atributoSecundario.value){
                 if(parseInt(points.innerText) == 0){
                 let atributos = [];
@@ -109,11 +111,10 @@ function build_prota(){
                 }
                 atributos[atributoPrincipal.value] =atributos[atributoPrincipal.value] +2;
                 atributos[atributoSecundario.value] =atributos[atributoSecundario.value] +1;
-                
-                const protagonista = new personagem(nick.value,1,atributos);
-                console.log(protagonista);
+                protagonista.push(new personagem(nick.value,1,atributos,atributoGenero.value));
                 display_criacao.style.display = "none";
                 display_jogo.style.display = "flex";
+               
             }else{
                 alert("Use todos os pontos de atributos!")
             }
@@ -125,3 +126,5 @@ function build_prota(){
     }
 }   
 criar_prota.onclick = build_prota;
+
+export default protagonista;

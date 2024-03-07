@@ -39,7 +39,12 @@
                     <option value="4">Sabedoria (+1)</option>
                     <option value="5">Carisma (+1)</option>
                 </select>
-
+                <select name="gênero" id="atributoGenero">
+                    <option value="selecioneGenero">Escolha seu gênero</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Feminino</option>
+                    <option value="N">Não informar</option>
+                </select>
             </div>
             <label><h2>Pontos de atributos: <p id="pontos-de-atributos">27</p></h2></label>
             <ul id = "distribuicaoAtributos" type = "none">
@@ -126,19 +131,26 @@
             <button id = "criar-prota">Começar!</button>
         </div>
         <div id = "display-jogo">
+            
             <div id = "jogo">
+                <a id = "abrir-inventario"><img src="/imagens/login.png" alt=""></a>
                 <div id = "inicio-mapa">
                     <button id = "irPara_Denji" class = "irPara"><img src="imagens/denji/token_2.webp" alt=""></button>
                 </div>
+                <div id = "sprites">
+                    <img src="/imagens/denji/sprites/denji_sprite_4.png" alt="">
+                </div>
                 <div id = "falas">
-                    <p id = "textoFala">Olá, sou Denji!!! Gosto de peitos!</p>
+                    <p id = "textoFala"></p>
                     <div id = "escolhas">
-                        <button id ="escolha-1">escolha 1</button>
-                        <button id = "escolha-2">escolha 2</button>
-                        <button id = "escolha-3">escolha 3</button>
+                        <button id ="escolha-1"></button>
+                        <button id = "escolha-2"></button>
+                        <button id = "escolha-3"></button>
                     </div>
                 </div>
+                
             </div>
+            
         </div>
         
     </main>
