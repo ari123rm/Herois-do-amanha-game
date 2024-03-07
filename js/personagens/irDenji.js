@@ -8,11 +8,10 @@ const escolha_1 = document.querySelector("#escolha-1");
 const escolha_2 = document.querySelector("#escolha-2");
 const escolha_3 = document.querySelector("#escolha-3");
 import { personagem } from "../classes.js";
-import protagonista from "../criacao.js";
+import { jogador } from "../jogo.js";
 let reputation_denji;
-const jogador = protagonista[protagonista.length - 1];
 //ficha do denji
-const denji = new personagem("Denji Miyazaki",15,[10,10,10,10,10,10],"M");
+const denji = new personagem("Denji Miyazaki",15,[22,14,16,8,8,10],"M");
 //funções auxiliares
 function mudarEscolhas(t1,t2,t3){
     escolha_1.innerText = t1;
@@ -46,13 +45,13 @@ export function falando_Denji(){
     falas.style.display = "flex";
     sprites.style.display = "flex";
     //setando reputação
-    if(protagonista[0].gender == "F"){
+    if(jogador.gender == "F"){
         reputation_denji = 75;
     }else{
         reputation_denji = 50;
     }
     //primeira interação
-    mudarFala("VRUMMM VRUMMMM");
+    mudarFala("RAN DAM DAM DAM DAM");
     mudarEscolhas("Quem é você??? (Car)","*fugir* (For)",`${denji.nome}??? (Car)`);
     escolha_1.onclick = quemEhVc;
     escolha_2.onclick = fugir;
@@ -60,7 +59,7 @@ export function falando_Denji(){
 }
 
 function quemEhVc(){
-    if(jogador.roll("Car") < denji.DT("Car") && jogador.gender != "F"){
+    if(jogador.roll("Car") < denji.DT("Sab") && jogador.gender != "F"){
         reputation_denji -= 15 ;
         mudarFala("Quem sou eu??? Me diga quem é você ou vou te cortar ao meio!");
         mudarEscolhas(`Foi mal... Sou ${jogador.nome}`,"Eu que vou te cortar! Seu merda!",`Pera... Você é o ${denji.nome}? (Car)`);
@@ -106,10 +105,6 @@ function saudacao(){
     
 }
 function dandoEmCima(){
-    
-    
-}
-function luta(){
     
     
 }

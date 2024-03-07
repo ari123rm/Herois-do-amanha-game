@@ -7,26 +7,9 @@
     display: flex;
     margin: 10px;
 }
-#abrir-inventario{
-    width: 50px;
-    height: 50px;
-    border-radius: 100%;
-    position: absolute;
-    right: 2%;
-    top:2%;
-    border: 1px solid darkslategrey;
-}
 
-#abrir-inventario img{
-    width: 50px;
-    height: 50px;
-    border-radius: 100%;
-}
-#abrir-inventario:hover img{
-    filter:grayscale(0.5);
-}
 #jogo{
-    display: none; /* flex*/
+    display: flex; /* flex*/
 
     width: 1080px;
     height: 720px;
@@ -130,4 +113,59 @@
 }
 #falas #escolhas button:hover{
     background-color:lightseagreen;
+}
+
+#abrir-inventario{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    position: absolute;
+    right: 2%;
+    top:2%;
+    border: 1px solid darkslategrey;
+}
+
+#abrir-inventario img{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
+#abrir-inventario:hover img{
+    filter:grayscale(0.5);
+}
+#inventario{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+#inventario .inv-texto{
+    font-size: 32px;
+    font-family: "Madimi One";
+    text-align: center;
+    color: black;
+   
+    position: absolute;
+}
+#inventario #inv-nome{
+    top:8.5%;
+    left:20%;
+    text-decoration: underline;
+}
+#inventario #inv-HP{
+    top: 35%;
+    right: 47%;
+    color: red;
+}
+#inventario #inv-atributos{
+    top:35%;
+    left: 10%;
+    display: grid;
+}
+#inventario #inv-atributos li{
+    margin-bottom: 200%;
+}
+#inventario #inv-CA{
+    top:25%;
+    left: 40%;
+    color: darkslategray;
 }

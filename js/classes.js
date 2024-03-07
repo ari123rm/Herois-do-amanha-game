@@ -3,7 +3,7 @@ class personagem{
     #level;
     #genero;
     #CA;
-
+    #hp;
     #forca;
     #destreza;
     #constituicao;
@@ -22,6 +22,7 @@ class personagem{
         this.#carisma = atributos[5];
         this.#genero = agenero;
         this.#CA = 10 + this.modDex;
+        this.#hp = 10 + this.modCon;
     }
 
     get nome(){
@@ -56,6 +57,9 @@ class personagem{
     set car(acar){
         this.#carisma = acar;
     }
+    set vida(ahp){
+        this.#hp = ahp;
+    }
 
 
     get modFor(){
@@ -81,6 +85,9 @@ class personagem{
     }
     get armor(){
         return this.#CA;
+    }
+    get vida(){
+        return this.#hp;
     }
 
     DT(atribute){
