@@ -10,8 +10,8 @@ class personagem{
     #inteligencia;
     #sabedoria;
     #carisma;
-
-    constructor(anick,alevel,atributos,agenero){
+    #inventario
+    constructor(anick,alevel,atributos,agenero,ainventario){
         this.#nick = anick;
         this.#level = alevel;
         this.#forca = atributos[0];
@@ -23,6 +23,7 @@ class personagem{
         this.#genero = agenero;
         this.#CA = 10 + this.modDex;
         this.#hp = 10 + this.modCon;
+        this.#inventario = ainventario;
     }
 
     get nome(){
@@ -60,7 +61,9 @@ class personagem{
     set vida(ahp){
         this.#hp = ahp;
     }
-
+    set inv(ainv){
+        this.#inventario.push(ainv);
+    }
 
     get modFor(){
         return Math.floor((this.#forca-10)/2);
@@ -89,6 +92,10 @@ class personagem{
     get vida(){
         return this.#hp;
     }
+    get inv(){
+        return this.#inventario;
+    }
+
 
     DT(atribute){
         switch(atribute){
@@ -136,44 +143,110 @@ class personagem{
                 break;
         }
     }
+    getMod(modificador){
+        switch(modificador){
+            case"For":
+                return this.modFor;
+            case"Dex":
+                return this.modDex;
+            case"Con":
+                return this.modCon;
+            case"Int":
+                return this.modInt;
+            case"Sab":
+                return this.modSab;
+            case"Car":
+                return this.modCar;
+        }
+
+    }
     
+    bater(indexItem){
+        return this.inv[indexItem].rollDamage() + this.getMod(this.inv[indexItem].attribute);
+    }
 
 }
 
 class arma{
+
+    #tipo;
+    #dano;
+    #valor;
+    #atributo;
+
     constructor(atipo,adano,avalor,aatributo){
-        this.tipo = atipo;
-        this.dano = adano;
-        this.valor = avalor;
-        this.atributo = aatributo;
+        this.#tipo = atipo;
+        this.#dano = adano;
+        this.#valor = avalor;
+        this.#atributo = aatributo;
     }
     get type(){
-        return this.tipo;
+        return this.#tipo;
     }
     set type(atipo){
-        this.tipo = atipo;
+        this.#tipo = atipo;
     }
 
     get damage(){
-        return this.dano;
+        return this.#dano;
     }
     set damage(adano){
-        this.dano = adano;
+        this.#dano = adano;
     }
 
     get value(){
-        return this.valor;
+        return this.#valor;
     }
     set value(avalor){
-        this.valor = avalor;
+        this.#valor = avalor;
     }
 
     get attribute(){
-        return this.atributo;
+        return this.#atributo;
     }
     set attribute(aatributo){
-        this.atributo = aatributo;
-    }    
+        this.#atributo = aatributo;
+    }
+
+    rollDamage(){
+        let daninho = this.damage.split("d");
+        let roll = 0;
+        for(let i = 0; i < daninho[0];i++){
+            roll += dado(daninho[1]);
+        }
+        return roll;
+    }
 }
 
-export {personagem,arma};
+class npc extends personagem{
+    #reputacao
+    constructor(anick,alevel,atributos,agenero,ainv){
+        super(anick,alevel,atributos,agenero,ainv);
+        this.#reputacao =  50;
+    }
+    get reputation(){
+        return this.#reputacao;
+    }
+    set reputation(rep){
+        this.#reputacao += rep;
+    }
+
+}
+class save extends personagem{
+    #progresso
+    constructor(anick,alevel,atributos,agenero,ainv){
+        super(anick,alevel,atributos,agenero,ainv);
+        this.#progresso = [];
+    }
+    get progress(){
+        return this.#progresso;
+    }
+    set progress(npc){
+        this.#progresso.push(npc);
+    }
+}
+
+export {personagem,arma,save,npc};
+function dado(max) {
+    return Math.floor(Math.random() * (max)) + 1;
+}

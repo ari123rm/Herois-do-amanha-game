@@ -3,7 +3,7 @@
     padding: 0;
 }
 #criacao-de-personagem{
-    display: grid;/* grid*/
+    display: none;/* grid*/
     text-align: center;
     background-color: aquamarine;
     padding-bottom: 10px;

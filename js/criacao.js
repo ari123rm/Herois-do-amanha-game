@@ -1,4 +1,4 @@
-import { personagem,arma } from "./classes.js";
+import { personagem,arma, save } from "./classes.js";
 
 
 const nick = document.querySelector("#nickname")
@@ -100,7 +100,7 @@ const display_jogo = document.querySelector("#jogo");
 const inv_nome = document.querySelector("#inv-nome");
 
 //prota teste
-const protagonista = [new personagem("Teste",15,[10,10,10,10,10,10],'M')];
+const protagonista = [new save("Teste",15,[10,10,10,10,10,10],'F',[])];
 //função para criar o personagem jogavel
 function build_prota(){
     if(atributoPrincipal.value != "selecionePricipal" && atributoSecundario.value != "selecioneSecundario"  && nick.value != "" && atributoGenero.value != "selecioneGenero"){
@@ -112,7 +112,7 @@ function build_prota(){
                 }
                 atributos[atributoPrincipal.value] =atributos[atributoPrincipal.value] +2;
                 atributos[atributoSecundario.value] =atributos[atributoSecundario.value] +1;
-                protagonista.push(new personagem(nick.value,1,atributos,atributoGenero.value));
+                protagonista.push(new save(nick.value,1,atributos,atributoGenero.value,[]));
                 if(nick.value.split("").length > 15){ 
                     inv_nome.style.fontSize = "16px"
                     inv_nome.style.top = "16%";

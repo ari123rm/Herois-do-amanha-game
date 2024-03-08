@@ -3,7 +3,9 @@ const mapa = document.querySelector("#inicio-mapa");
 const falas = document.querySelector("#falas");
 const sprites = document.querySelector("#sprites");
 
+
 import {jogador} from "./criacao.js";
+
 
 //abrindo inventario
 import { criarFicha } from "./ficha.js";
