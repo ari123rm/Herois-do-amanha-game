@@ -136,7 +136,7 @@
 #inventario{
     width: 100%;
     height: 100%;
-    display: flex;
+    display: none;
 }
 #inventario .inv-texto{
     font-size: 32px;
@@ -147,25 +147,80 @@
     position: absolute;
 }
 #inventario #inv-nome{
-    top:8.5%;
-    left:20%;
+    top:14.5%;
+    left: 26%;
+    width: 25%;
     text-decoration: underline;
 }
-#inventario #inv-HP{
-    top: 35%;
-    right: 47%;
+
+#inventario #inv-atributos{
+    top: 27%;
+    left: 16.5%;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#inventario #inv-atributos li{
+    display: flex;
+    margin-right:33%;
+    margin-bottom: 24%;
+    font-weight: bolder;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    
+    text-align: center;
+}
+#inventario #inv-atributos #inv-for{
     color: red;
 }
-#inventario #inv-atributos{
-    top:35%;
-    left: 10%;
-    display: grid;
+#inventario #inv-atributos #inv-dex{
+    color: cyan;
 }
-#inventario #inv-atributos li{
-    margin-bottom: 200%;
+#inventario #inv-atributos #inv-con{
+    color: greenyellow;
+}
+#inventario #inv-atributos #inv-int{
+    color: plum;
+}
+#inventario #inv-atributos #inv-sab{
+    color: purple;
+}
+#inventario #inv-atributos #inv-car{
+    color: goldenrod;
 }
 #inventario #inv-CA{
-    top:25%;
-    left: 40%;
+    top:29%;
+    left: 48.5%;
     color: darkslategray;
+    font-weight: bolder;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+#inventario #inv-HP{
+    top: 53%;
+    right: 48.5%;
+    color: red;
+    font-weight: bolder;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    width: 50px;
+}
+#inventario #inv-LVL{
+    top: 15.5%;
+    right: 16.5%;
+    color: green;
+    font-weight: bolder;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    width: 50px;
+}
+#inventario #inv-GEN{
+    top: 14.5%;
+    right: 28.5%;
+    font-weight: bolder;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    width: 50px;
 }

@@ -7,8 +7,8 @@ const aumentarAtributo = document.querySelectorAll(".aumentarAtributo");
 const valorAtributo = document.querySelectorAll(".valorAtributo");
 const points = document.querySelector("#pontos-de-atributos");
 const modificadores = document.querySelectorAll(".modAtributo");
-//função para diminuir o valor do atributo
 
+//função para diminuir o valor do atributo
 const diminuirFor = document.querySelector("#diminuirFor");
 const diminuirDex = document.querySelector("#diminuirDex");
 const diminuirCon = document.querySelector("#diminuirCon");
@@ -49,7 +49,6 @@ diminuirCar.onclick = () =>{
 }
 
 //função para aumentar o valor do atributo
-
     const aumentarFor = document.querySelector("#aumentarFor");
     const aumentarDex = document.querySelector("#aumentarDex");
     const aumentarCon = document.querySelector("#aumentarCon");
@@ -90,7 +89,7 @@ diminuirCar.onclick = () =>{
         aumentar_Atributo(5);
     }
 
-//função para criar o personagem jogavel
+
 
 const atributoPrincipal = document.querySelector("#atributoPrincipal");
 const atributoSecundario = document.querySelector("#atributoSecundario");
@@ -98,9 +97,11 @@ const atributoGenero = document.querySelector("#atributoGenero");
 const criar_prota = document.querySelector("#criar-prota");
 const display_criacao = document.querySelector("#criacao-de-personagem");
 const display_jogo = document.querySelector("#jogo");
+const inv_nome = document.querySelector("#inv-nome");
 
 //prota teste
 const protagonista = [new personagem("Teste",15,[10,10,10,10,10,10],'M')];
+//função para criar o personagem jogavel
 function build_prota(){
     if(atributoPrincipal.value != "selecionePricipal" && atributoSecundario.value != "selecioneSecundario"  && nick.value != "" && atributoGenero.value != "selecioneGenero"){
         if(atributoPrincipal.value != atributoSecundario.value){
@@ -112,6 +113,10 @@ function build_prota(){
                 atributos[atributoPrincipal.value] =atributos[atributoPrincipal.value] +2;
                 atributos[atributoSecundario.value] =atributos[atributoSecundario.value] +1;
                 protagonista.push(new personagem(nick.value,1,atributos,atributoGenero.value));
+                if(nick.value.split("").length > 15){ 
+                    inv_nome.style.fontSize = "16px"
+                    inv_nome.style.top = "16%";
+                };
                 display_criacao.style.display = "none";
                 display_jogo.style.display = "flex";
                
@@ -127,4 +132,7 @@ function build_prota(){
 }   
 criar_prota.onclick = build_prota;
 
-export default protagonista;
+//exporta o jogador (Teste ou Personagem Criado)
+export function jogador(){
+    return protagonista[protagonista.length - 1];
+}

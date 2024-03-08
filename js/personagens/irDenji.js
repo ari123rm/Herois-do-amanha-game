@@ -8,7 +8,7 @@ const escolha_1 = document.querySelector("#escolha-1");
 const escolha_2 = document.querySelector("#escolha-2");
 const escolha_3 = document.querySelector("#escolha-3");
 import { personagem } from "../classes.js";
-import { jogador } from "../jogo.js";
+import {jogador} from "../criacao.js";
 let reputation_denji;
 //ficha do denji
 const denji = new personagem("Denji Miyazaki",15,[22,14,16,8,8,10],"M");
@@ -59,10 +59,10 @@ export function falando_Denji(){
 }
 
 function quemEhVc(){
-    if(jogador.roll("Car") < denji.DT("Sab") && jogador.gender != "F"){
+    if(jogador().roll("Car") < denji.DT("Sab") && jogador().gender != "F"){
         reputation_denji -= 15 ;
         mudarFala("Quem sou eu??? Me diga quem é você ou vou te cortar ao meio!");
-        mudarEscolhas(`Foi mal... Sou ${jogador.nome}`,"Eu que vou te cortar! Seu merda!",`Pera... Você é o ${denji.nome}? (Car)`);
+        mudarEscolhas(`Foi mal... Sou ${jogador().nome}`,"Eu que vou te cortar! Seu merda!",`Pera... Você é o ${denji.nome}? (Car)`);
         escolha_1.onclick = saudacao;
         escolha_2.onclick = luta;
         escolha_3.onclick = sabiaQuemEra;
@@ -70,7 +70,7 @@ function quemEhVc(){
         reputation_denji += 15;
         mudarSprite(3);
         mudarFala(`Eu sou ${denji.nome}, mais conhecido como CHAINSAWMAN, e o seu?`);
-        mudarEscolhas(`Eu sou ${jogador.nome}`,`${denji.nome}...Acho que já ouvi falar...(Car)`,"Então é esse o nome que vai ta na minha aliança?");
+        mudarEscolhas(`Eu sou ${jogador().nome}`,`${denji.nome}...Acho que já ouvi falar...(Car)`,"Então é esse o nome que vai ta na minha aliança?");
         escolha_1.onclick = saudacao;
         escolha_2.onclick = sabiaQuemEra;
         escolha_3.onclick = dandoEmCima;
@@ -78,15 +78,15 @@ function quemEhVc(){
 }
 
 function fugir(){
-    if(jogador.roll("For") < denji.DT("For")){
+    if(jogador().roll("For") < denji.DT("For")){
         reputation_denji -= 25;
-        if(jogador.gender != "F"){
+        if(jogador().gender != "F"){
             if(reputation_denji < 15){
                 luta();
             }else{
                 mudarSprite(4);
                 mudarFala(`Ta pensando que vai aonde? Foge não! *${denji.nome} te segurou*`);
-                mudarEscolhas("Me solta! *tentar se soltar* (For)","Tava so apostando corrida com você :D","")
+                mudarEscolhas("Me solta! *tentar se soltar* (For)","Tava so apostando corrida com você :D","");
             }
         }else{
             

@@ -3,10 +3,8 @@ const mapa = document.querySelector("#inicio-mapa");
 const falas = document.querySelector("#falas");
 const sprites = document.querySelector("#sprites");
 
-//buildando o jogador
-import protagonista from "./criacao.js";
-export const jogador = protagonista[protagonista.length - 1];
-console.log(jogador);
+import {jogador} from "./criacao.js";
+
 //abrindo inventario
 import { criarFicha } from "./ficha.js";
 let mapaAnterior,falaAberto;
@@ -49,7 +47,7 @@ function abrindo_inventario (){
             sprites.style.display = "none";
             falaAberto = true;
         }
-        jogo.style.backgroundImage = "url(/imagens/fichaD&D.png)";
+        jogo.style.backgroundImage = "url(/imagens/fichaHerois.png)";
         criarFicha();
     }
 }   
