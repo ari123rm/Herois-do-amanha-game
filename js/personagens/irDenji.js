@@ -7,11 +7,11 @@ const escolhas = document.querySelector("#escolhas");
 const escolha_1 = document.querySelector("#escolha-1");
 const escolha_2 = document.querySelector("#escolha-2");
 const escolha_3 = document.querySelector("#escolha-3");
-import { personagem } from "../classes.js";
+import {denji} from "../objects.js";
 import {jogador} from "../criacao.js";
 let reputation_denji;
 //ficha do denji
-const denji = new personagem("Denji Miyazaki",15,[22,14,16,8,8,10],"M");
+
 //funções auxiliares
 function mudarEscolhas(t1,t2,t3){
     escolha_1.innerText = t1;
