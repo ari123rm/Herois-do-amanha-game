@@ -2,11 +2,22 @@
     margin: 0;
     padding: 0;
 }
+#the-game{
+    background: -webkit-linear-gradient(left, #000000, #794600);
+    background: -moz-linear-gradient(left, #000000, #794600);
+    background: -ms-linear-gradient(left, #000000, #794600);
+    background: -o-linear-gradient(left, #000000, #794600);
+    background: linear-gradient(to right, #000000, #794600);
+
+}
+
 #display-jogo{
     justify-content: center;
+    align-content: center;
     display: flex;
-    height:100%;
     width: 100%;
+    margin-top: 5%;
+    position: relative;
 }
 
 #jogo{
@@ -104,7 +115,7 @@
 #falas #escolhas button{
     bottom: 0;
     width: 33.33%;
-    font-size: 32px;
+    font-size: 22px;
     font-family: "Madimi One";
     color: black;
     background-color:lightblue;
@@ -233,4 +244,20 @@
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
     width: 50px;
+}
+
+#barraHP{
+    position: absolute;
+    width: 20px;
+    height: 300px;
+    border-radius: 10px;
+    background-color: #ccc;
+    top:5%;
+    left: 5%;
+    display: grid;
+    align-items: end;
+}
+#barraHP div{
+    background-color: crimson;
+    border-radius: 10px;
 }

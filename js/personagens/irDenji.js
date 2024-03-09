@@ -35,7 +35,6 @@ function mudarSprite(valor){
     }
 }
 function dado(max) {
-    min = Math.ceil(1);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max)) + 1;
 }
@@ -59,6 +58,7 @@ export function falando_Denji(){
 function quemEhVc(){
     if(jogador().roll("Car") < denji.DT("Sab") && jogador().gender != "F"){
         denji.reputation = -15;
+        mudarSprite(7);
         mudarFala("Quem sou eu??? Me diga quem é você ou vou te cortar ao meio!");
         mudarEscolhas(`Foi mal... Sou ${jogador().nome}`,"Eu que vou te cortar! Seu merda!",`Pera... Você é o ${denji.nome}? (Car)`);
         escolha_1.onclick = saudacao;
@@ -110,29 +110,140 @@ function fugir(){
 }
 
 function sabiaQuemEra(){
-    if(jogador().roll("Car") < denji.DT("Sab")){
-
+    if(jogador().roll("Car") < denji.DT("Sab") && jogador().gender != 'F'){
+        mudarSprite(4)
+        mudarFala("E COMO CARALHOS VOCÊ SABIA MEU NOME??? MORRA SEU ESQUISITO!")
+        mudarEscolhas("*lutar", "CALMA CARA! EU SEI DO DESENHO LA", "RELAXA! VOCÊ NÃO É UM HERÓI DO AMANHÃ????");
+        escolha_1.onclick = luta;
+        escolha_2.onclick = anime;
+        escolha_3.onclick = herois;
     }else{
         if(jogador().gender == 'F'){
-            mudarSprite(3);
-            mudarFala(". . . . . . . . . . . . . . . . . \n Acho que me apaixonei UwU");
+            mudarSprite(5);
+            mudarFala(". . . . . . . . . . . . . . . . . \n Acho que me apaixonei UwU que gatinha ein");
             mudarEscolhas("Eu tambêm <3 \n *se aproximar para beijo","Sem querer magoar, mas... não","Ta maluco? Eu sou homem!");
-            
+            escolha_1.onclick = beijo;
+            escolha_2.onclick = rejeitado;
+            escolha_3.onclick = virouHomem;
+        }else{
+            mudarSprite(6)
+            mudarFala("Uau você me conhece :) Mas . . . . . . . como?");
+            mudarEscolhas("Não posso esquecer o sorriso mais lindo do mundo UwU", "Do desenho lá", "Do melhor RPG do mundo Heróis do Amanhã");
+            escolha_1.onclick = dandoEmCima;
+            escolha_2.onclick = anime;
+            escolha_3.onclick = herois;
         }
     }
-    
 }
 function saudacao(){
-    
-    
-}
-function dandoEmCima(){
-    
-    
-}
-function luta(){
 
+    if(jogador().gender == 'F'){
+        mudarSprite(6);
+        mudarFala(`${jogador().nome}. . . . . Acho que vai ficar bonito na certidão de casamento da gente`);
+        mudarEscolhas("Esquisito","*Fugir","Melhor ainda na certidão de nascimento do nosso filho");
+        escolha_1.onclick = deuFora;
+        escolha_2.onclick = fugir;
+        escolha_3.onclick = dandoEmCima;
+    }
 }
-function sair(){
+
+//mecanica de luta
+const barraHP = document.querySelector("#barraHP div");
+function luta(){
+    let x1 = true;
+
+        mudarSprite(7);
+        if(denji.vida >= denji.lvl*(10 + denji.modCon)*0.7)mudarFala("HAHAHAHAHA VAI SER UMA MARAVILHA TE CORTAR AO MEIO");
+        if(denji.vida < denji.lvl*(10 + denji.modCon)*0.7 && denji.vida >= denji.lvl*(10 + denji.modCon)*0.4)mudarFala("SEU MALDITO VOU TE CORTARRRRRRRRRRRRRR");
+        if(denji.vida < denji.lvl*(10 + denji.modCon)*0.4)mudarFala("Arf Arf Arf, Você é até forte, mas vai APANHAR HAHAHHAHAHAHAHA");
+        mudarEscolhas(`Bater com ${jogador().inv[0].type}`,"*fugir(For)","*esquivar(Dex)");
+        escolha_1.onclick = bater;
+        escolha_2.onclick = fugir;
+        escolha_3.onclick = esquivar;
+}
+function bater(){
+    let valorDado = dado(20);
+    if(valorDado + jogador().getMod(jogador().inv[0].attribute) + Math.floor(jogador().lvl/2) >= denji.armor){
+        if(valorDado == 20){
+            denji.vida -= jogador().inv[0].rollDamage() + jogador().inv[0].rollDamage() + jogador().getMod(jogador().inv[0].attribute)
+            console.log(denji.vida)
+        }else{
+            denji.vida -= 1* jogador().inv[0].rollDamage() + jogador().getMod(jogador().inv[0].attribute)
+            console.log(denji.vida)
+        }
+        if(denji.vida >= denji.lvl*(10 + denji.modCon)*0.7){
+            switch(dado(6)){
+                case 1:
+                    mudarFala("MORRA LIXO!")
+                    break;
+                case 2:
+                    mudarFala("FRACO!")
+                    break;
+                case 3:
+                    mudarFala("MORRA!")
+                    break;
+                case 4:
+                    mudarFala("TA FRACO EIN?")
+                    break;
+                case 5:
+                    mudarFala("TA FACIL EIN!")
+                    break;
+                case 6:
+                    mudarFala("RAN DAM DAM DAM DAM")
+                    break;
+            }
+        }
+            if(denji.vida < denji.lvl*(10 + denji.modCon)*0.7 && denji.vida >= denji.lvl*(10 + denji.modCon)*0.4){
+                switch(dado(6)){
+                    case 1:
+                        mudarFala("AGORA SIM!")
+                        break;
+                    case 2:
+                        mudarFala("VEM PRA CIMA!")
+                        break;
+                    case 3:
+                        mudarFala("NEWBA!")
+                        break;
+                    case 4:
+                        mudarFala("TOMA ESSA!")
+                        break;
+                    case 5:
+                        mudarFala("VOU TE AMASSAR!")
+                        break;
+                    case 6:
+                        mudarFala("*barulhos de motosserra")
+                        break;
+                }
+            }
+        if(denji.vida < denji.lvl*(10 + denji.modCon)*0.4){
+            switch(dado(6)){
+                case 1:
+                    mudarFala("NÃO VOU DESISTIR")
+                    break;
+                case 2:
+                    mudarFala("MALDITO!")
+                    break;
+                case 3:
+                    mudarFala("FILHO DA...")
+                    break;
+                case 4:
+                    mudarFala("CARALHO")
+                    break;
+                case 5:
+                    mudarFala("Arf Arf Arf")
+                    break;
+                case 6:
+                    mudarFala("*ele ta cansado")
+                    break;
+            }
+        }
+            if(denji.vida <= 0){
+            alert("DENJI MORREU");
+        }
+    }else{
+        mudarFala("*Você Errou");
+    }
+}
+function esquivar(){
 
 }

@@ -22,7 +22,7 @@ class personagem{
         this.#carisma = atributos[5];
         this.#genero = agenero;
         this.#CA = 10 + this.modDex;
-        this.#hp = 10 + this.modCon;
+        this.#hp = this.lvl*(10 + this.modCon);
         this.#inventario = ainventario;
     }
 
