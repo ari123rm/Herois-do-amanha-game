@@ -1,4 +1,4 @@
-class personagem{
+class Personagem{
     #nick;
     #level;
     #genero;
@@ -167,7 +167,7 @@ class personagem{
 
 }
 
-class arma{
+class Arma{
 
     #tipo;
     #dano;
@@ -218,7 +218,7 @@ class arma{
     }
 }
 
-class npc extends personagem{
+class Npc extends Personagem{
     #reputacao
     constructor(anick,alevel,atributos,agenero,ainv){
         super(anick,alevel,atributos,agenero,ainv);
@@ -232,7 +232,7 @@ class npc extends personagem{
     }
 
 }
-class save extends personagem{
+class Save extends Personagem{
     #progresso
     constructor(anick,alevel,atributos,agenero,ainv){
         super(anick,alevel,atributos,agenero,ainv);
@@ -246,7 +246,7 @@ class save extends personagem{
     }
 }
 
-export {personagem,arma,save,npc};
+export {Personagem,Arma,Save,Npc};
 function dado(max) {
     return Math.floor(Math.random() * (max)) + 1;
 }

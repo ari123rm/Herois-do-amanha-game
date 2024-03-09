@@ -252,12 +252,60 @@
     height: 300px;
     border-radius: 10px;
     background-color: #ccc;
-    top:5%;
-    left: 5%;
+    top:15%;
+    right: 3.5%;
     display: grid;
     align-items: end;
+    border: 1px solid black;
 }
 #barraHP div{
     background-color: crimson;
     border-radius: 10px;
+
+}
+#barraHP p{
+    position: absolute;
+    text-align: center;
+    align-content: space-evenly;
+    width: 20px;
+    color: white;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    font-family: impact;
+    font-size: 20px;
+    height: 300px;
+    display: grid;
+}
+#barraINIMIGO{
+    position: absolute;
+    display: none;
+    width: 500px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #ccc;
+    top: 2%;
+    align-items: end;
+    border: 2px solid black;
+}
+
+#barraINIMIGO div{
+    background-color: chocolate;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+}
+#barraINIMIGO p{
+    position: absolute;
+    position: absolute;
+    text-align: center;
+    align-content: space-evenly;
+    height: 20px;
+    color: white;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    font-family: impact;
+    font-size: 20px;
+    width: 500px;
+    display: grid;
+    letter-spacing: 1px;
 }

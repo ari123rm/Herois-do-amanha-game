@@ -7,6 +7,10 @@ const escolhas = document.querySelector("#escolhas");
 const escolha_1 = document.querySelector("#escolha-1");
 const escolha_2 = document.querySelector("#escolha-2");
 const escolha_3 = document.querySelector("#escolha-3");
+
+const barraHP = document.querySelector("#barraHP div");
+const barraInimigo = document.querySelector("#barraINIMIGO");
+const barraInimigoHP = document.querySelector("#barraINIMIGO div");
 import {denji} from "../objects.js";
 import {jogador} from "../criacao.js";
 //funções auxiliares
@@ -45,6 +49,8 @@ export function falando_Denji(){
     //aparecendo as falas :D
     falas.style.display = "flex";
     sprites.style.display = "flex";
+    barraHP.style.height = ` ${(jogador().vida)/ (jogador().lvl * (10 + jogador().modCon))*100}%`;
+    
     //setando reputação
     if(jogador.gender == "F")denji.reputation = 25;
     //primeira interação
@@ -148,14 +154,13 @@ function saudacao(){
 }
 
 //mecanica de luta
-const barraHP = document.querySelector("#barraHP div");
+const barraInimigoNome = document.querySelector("#barraINIMIGO p");
 function luta(){
-    let x1 = true;
-
+        barraInimigo.style.display = "grid";
+        barraInimigoHP.style.width = `${(denji.vida)/ (denji.lvl * (10 + denji.modCon))*100}%`;
+        barraInimigoNome.innerText = denji.nome;
         mudarSprite(7);
-        if(denji.vida >= denji.lvl*(10 + denji.modCon)*0.7)mudarFala("HAHAHAHAHA VAI SER UMA MARAVILHA TE CORTAR AO MEIO");
-        if(denji.vida < denji.lvl*(10 + denji.modCon)*0.7 && denji.vida >= denji.lvl*(10 + denji.modCon)*0.4)mudarFala("SEU MALDITO VOU TE CORTARRRRRRRRRRRRRR");
-        if(denji.vida < denji.lvl*(10 + denji.modCon)*0.4)mudarFala("Arf Arf Arf, Você é até forte, mas vai APANHAR HAHAHHAHAHAHAHA");
+        mudarFala("HAHAHAHAHA VAI SER UMA MARAVILHA TE CORTAR AO MEIO");
         mudarEscolhas(`Bater com ${jogador().inv[0].type}`,"*fugir(For)","*esquivar(Dex)");
         escolha_1.onclick = bater;
         escolha_2.onclick = fugir;
@@ -163,13 +168,14 @@ function luta(){
 }
 function bater(){
     let valorDado = dado(20);
+    console.log(valorDado);
     if(valorDado + jogador().getMod(jogador().inv[0].attribute) + Math.floor(jogador().lvl/2) >= denji.armor){
         if(valorDado == 20){
             denji.vida -= jogador().inv[0].rollDamage() + jogador().inv[0].rollDamage() + jogador().getMod(jogador().inv[0].attribute)
-            console.log(denji.vida)
+       
         }else{
             denji.vida -= 1* jogador().inv[0].rollDamage() + jogador().getMod(jogador().inv[0].attribute)
-            console.log(denji.vida)
+ 
         }
         if(denji.vida >= denji.lvl*(10 + denji.modCon)*0.7){
             switch(dado(6)){
@@ -239,10 +245,29 @@ function bater(){
         }
             if(denji.vida <= 0){
             alert("DENJI MORREU");
+            sair();
         }
     }else{
         mudarFala("*Você Errou");
     }
+    valorDado = dado(20);
+    console.log(valorDado);
+    if(valorDado + denji.getMod(denji.inv[0].attribute) + Math.floor(denji.lvl/2) >= jogador().armor){
+        if(valorDado == 20){
+            jogador().vida -= denji.inv[0].rollDamage() + denji.inv[0].rollDamage() + denji.getMod(denji.inv[0].attribute)
+
+        }else{
+            jogador().vida -=  denji.inv[0].rollDamage() + denji.getMod(denji.inv[0].attribute)
+            
+        }
+        if(jogador().vida <= 0){
+            alert("VOCÊ MORREU");
+            sair();
+        }
+    }
+    barraHP.style.height = ` ${(jogador().vida)/ (jogador().lvl * (10 + jogador().modCon))*100}%`;
+    barraInimigoHP.style.width = `${(denji.vida)/ (denji.lvl * (10 + denji.modCon))*100}%`;
+    
 }
 function esquivar(){
 

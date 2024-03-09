@@ -1,4 +1,4 @@
-import { personagem,arma, save } from "./classes.js";
+import { Personagem,Arma, Save } from "./classes.js";
 
 
 const nick = document.querySelector("#nickname")
@@ -98,10 +98,11 @@ const criar_prota = document.querySelector("#criar-prota");
 const display_criacao = document.querySelector("#criacao-de-personagem");
 const display_jogo = document.querySelector("#jogo");
 const inv_nome = document.querySelector("#inv-nome");
+const barraHpNome = document.querySelector("#barraHP p");
 
 //prota teste
-const mao = new arma("Soco","1d12",0,"For");
-const protagonista = [new save("Teste",7,[10,10,10,10,10,10],'M',[mao])];
+import { mao } from "./objects.js";
+const protagonista = [new Save("Teste",7,[10,10,10,10,10,10],'M',[mao])];
 //função para criar o personagem jogavel
 function build_prota(){
     if(atributoPrincipal.value != "selecionePricipal" && atributoSecundario.value != "selecioneSecundario"  && nick.value != "" && atributoGenero.value != "selecioneGenero"){
@@ -113,14 +114,25 @@ function build_prota(){
                 }
                 atributos[atributoPrincipal.value] =atributos[atributoPrincipal.value] +2;
                 atributos[atributoSecundario.value] =atributos[atributoSecundario.value] +1;
-                protagonista.push(new save(nick.value,1,atributos,atributoGenero.value,[mao]));
+                protagonista.push(new Save(nick.value,1,atributos,atributoGenero.value,[mao]));
+                const nickSplit = nick.value.split(" ");
+                let espaco = "";
+                barraHpNome.innerText = "";
+                nickSplit[0].split("").forEach(element => {
+                    espaco += element + '<br>';
+                });
+                barraHpNome.innerHTML = espaco;
+                if(nickSplit[0].split("").length > 15){
+                    barraHpNome.style.fontSize = "12px";
+                } 
                 if(nick.value.split("").length > 15){ 
                     inv_nome.style.fontSize = "16px"
                     inv_nome.style.top = "16%";
+
                 };
                 display_criacao.style.display = "none";
                 display_jogo.style.display = "flex";
-               
+                
             }else{
                 alert("Use todos os pontos de atributos!")
             }
@@ -135,5 +147,6 @@ criar_prota.onclick = build_prota;
 
 //exporta o jogador (Teste ou Personagem Criado)
 export function jogador(){
+    
     return protagonista[protagonista.length - 1];
 }
