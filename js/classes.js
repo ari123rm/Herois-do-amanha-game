@@ -229,7 +229,9 @@ class Npc extends Personagem{
     }
     set reputation(rep){
         this.#reputacao += rep;
-    }
+        if(this.#reputacao >= 100)this.#reputacao = 100;
+        if(this.#reputacao <= 0)this.#reputacao = 0;
+    }   
 
 }
 class Save extends Personagem{

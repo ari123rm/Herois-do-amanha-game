@@ -11,6 +11,8 @@ const escolha_3 = document.querySelector("#escolha-3");
 const barraHP = document.querySelector("#barraHP div");
 const barraInimigo = document.querySelector("#barraINIMIGO");
 const barraInimigoHP = document.querySelector("#barraINIMIGO div");
+const barraREP = document.querySelector("#barraREP");
+const barraREPvalue = document.querySelector("#barraREP div");
 import {denji} from "../objects.js";
 import {jogador} from "../criacao.js";
 //funções auxiliares
@@ -42,7 +44,10 @@ function dado(max) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max)) + 1;
 }
-
+function reputacao(value){
+    denji.reputation = value;
+    barraREPvalue.style.width = `${denji.reputation}%`
+}
 
 // conversando com denji
 export function falando_Denji(){
@@ -50,9 +55,9 @@ export function falando_Denji(){
     falas.style.display = "flex";
     sprites.style.display = "flex";
     barraHP.style.height = ` ${(jogador().vida)/ (jogador().lvl * (10 + jogador().modCon))*100}%`;
-    
+    barraREPvalue.style.width = `${denji.reputation}%`;
     //setando reputação
-    if(jogador.gender == "F")denji.reputation = 25;
+    if(jogador.gender == "F")reputacao(25);
     //primeira interação
     mudarFala("RAN DAM DAM DAM DAM");
     mudarEscolhas("Quem é você??? (Car)","*fugir* (For)",`${denji.nome}??? (Car)`);
@@ -63,7 +68,7 @@ export function falando_Denji(){
 
 function quemEhVc(){
     if(jogador().roll("Car") < denji.DT("Sab") && jogador().gender != "F"){
-        denji.reputation = -15;
+        reputacao(-15);
         mudarSprite(7);
         mudarFala("Quem sou eu??? Me diga quem é você ou vou te cortar ao meio!");
         mudarEscolhas(`Foi mal... Sou ${jogador().nome}`,"Eu que vou te cortar! Seu merda!",`Pera... Você é o ${denji.nome}? (Car)`);
@@ -71,7 +76,7 @@ function quemEhVc(){
         escolha_2.onclick = luta;
         escolha_3.onclick = sabiaQuemEra;
     }else{
-        denji.reputation = 10;
+        reputacao(10);
         mudarSprite(3);
         if(jogador().gender == "F"){ mudarFala(`Deixa eu tirar a Armadura aki... Eu sou ${denji.nome}, e qual o nome dessa gatinha ? *leve sorriso sedutor`) }
         else{mudarFala(`Meu nome é ${denji.nome}, mais conhecido como CHAINSAWMAN, e o seu?`);}
@@ -84,7 +89,7 @@ function quemEhVc(){
 
 function fugir(){
     if(jogador().roll("For") < denji.DT("For")){
-        denji.reputation = -25;
+        reputacao(-25);
         if(jogador().gender != "F"){
             if(denji.reputation < 15){
                 luta();
@@ -94,7 +99,7 @@ function fugir(){
                 mudarEscolhas("Me solta! *tentar se soltar* (For)","Tava so apostando corrida com você :D","*Lutar");
                 escolha_1.onclick = fugir;
                 escolha_2.onclick = apostandoCorrida;
-                escolha_3.onclick = lutar;
+                escolha_3.onclick = luta;
             }            
         }else{
             mudarSprite(2);
@@ -102,10 +107,10 @@ function fugir(){
             mudarEscolhas("Me solta! *tentar se soltar* (For)","Tava so apostando corrida com você :D","*Lutar");
                 escolha_1.onclick = fugir;
                 escolha_2.onclick = apostandoCorrida;
-                escolha_3.onclick = lutar;
+                escolha_3.onclick = luta;
         }
     }else{
-        denji.reputation = -50;
+        reputacao(-100);
         mudarSprite(-1);
         mudarFala("Você escapou!");
         mudarEscolhas("Sair","Sair","Sair");
@@ -129,7 +134,7 @@ function sabiaQuemEra(){
             mudarFala(". . . . . . . . . . . . . . . . . \n Acho que me apaixonei UwU que gatinha ein");
             mudarEscolhas("Eu tambêm <3 \n *se aproximar para beijo","Sem querer magoar, mas... não","Ta maluco? Eu sou homem!");
             escolha_1.onclick = beijo;
-            escolha_2.onclick = rejeitado;
+            escolha_2.onclick = deuFora;
             escolha_3.onclick = virouHomem;
         }else{
             mudarSprite(6)
@@ -150,17 +155,87 @@ function saudacao(){
         escolha_1.onclick = deuFora;
         escolha_2.onclick = fugir;
         escolha_3.onclick = dandoEmCima;
+    }else{
+        mudarSprite(2)
+        mudarFala(`${jogador().nome} . . . . . . . . . . E O QUE VOCÊ QUER COMIGO?`)
+        mudarEscolhas("Eu sou da Agência do tempo, vim ajudar contra o ART","Deixa de besteira, estamos no mesmo barco","SUA VIDA HAHAHAHHAHA *lutar")
+        escolha_1.onclick = herois;
+        escolha_2.onclick = herois;
+        escolha_3.onclick = luta;
     }
 }
 
+function dandoEmCima(){
+    if(jogador().gender == "F"){
+        reputacao(50);
+        mudarSprite(5);
+        mudarFala("Pochita... Acho que é ela... Você é a garota certa!");
+        mudarEscolhas("*Se aproximar para beijo","Não aceita um elogio que já fica gado, que nojento",`${denji.nome},casa comigo?`);
+        escolha_1.onclick = beijo;
+        escolha_2.onclick = deuFora;
+        escolha_3.onclick = casamento;
+    }else{
+        if(jogador().gender =="M"){
+            reputacao(-50);
+            mudarSprite(2);
+            mudarFala("TA MALUCO FILHA DA PUTA!!! EU SOU HOMEM CARALHO! *barulhos de motosserra");
+            mudarEscolhas("ENTÃO VAI PRA CASA DO CARALHO *lutar", "CORRE QUE ELE TA MALUCO *fugir","Eu sou mulher! >.< (car)");
+            escolha_1.onclick = luta;
+            escolha_2.onclick = fugir;
+            escolha_3.onclick = virouMulher;
+        }
+        if(jogador().gender == "N"){
+            mudarSprite(1);
+            mudarFala("Isso era para ser um elogio?");
+            mudarEscolhas("NÃO ACEITA UM ELOGIO? *lutar", "Desculpaaaaaa... (correr com vergonha)","Eu sou mulher! >.< (car)");
+            escolha_1.onclick = luta;
+            escolha_2.onclick = fugir;
+            escolha_3.onclick = virouMulher;
+        }
+    }
+}
+
+
+
+
+
 //mecanica de luta
+
+function denjiBate(){
+        let valorDado = dado(20);
+        if(valorDado + denji.getMod(denji.inv[0].attribute) + Math.floor(denji.lvl/2) >= jogador().armor){
+            if(valorDado == 20){
+                jogador().vida -= denji.inv[0].rollDamage() + denji.inv[0].rollDamage() + denji.getMod(denji.inv[0].attribute)
+    
+            }else{
+                jogador().vida -=  denji.inv[0].rollDamage() + denji.getMod(denji.inv[0].attribute)
+                
+            }
+            if(jogador().vida <= 0){
+                alert("VOCÊ MORREU");
+                sair();
+            }
+        }
+        barraHP.style.height = ` ${(jogador().vida)/ (jogador().lvl * (10 + jogador().modCon))*100}%`;
+        barraInimigoHP.style.width = `${(denji.vida)/ (denji.lvl * (10 + denji.modCon))*100}%`;
+}
+let lutando = false;
 const barraInimigoNome = document.querySelector("#barraINIMIGO p");
 function luta(){
+    if(lutando){
+        mudarFala("RESOLVE COMO MACHO ESSA PORRA");
+        denjiBate()
+        
+    }else{
+        lutando = true;
+        mudarFala("HAHAHAHAHA VAI SER UMA MARAVILHA TE CORTAR AO MEIO");
+    }
+    reputacao(-100);
         barraInimigo.style.display = "grid";
         barraInimigoHP.style.width = `${(denji.vida)/ (denji.lvl * (10 + denji.modCon))*100}%`;
         barraInimigoNome.innerText = denji.nome;
         mudarSprite(7);
-        mudarFala("HAHAHAHAHA VAI SER UMA MARAVILHA TE CORTAR AO MEIO");
+
         mudarEscolhas(`Bater com ${jogador().inv[0].type}`,"*fugir(For)","*esquivar(Dex)");
         escolha_1.onclick = bater;
         escolha_2.onclick = fugir;
@@ -250,23 +325,7 @@ function bater(){
     }else{
         mudarFala("*Você Errou");
     }
-    valorDado = dado(20);
-    console.log(valorDado);
-    if(valorDado + denji.getMod(denji.inv[0].attribute) + Math.floor(denji.lvl/2) >= jogador().armor){
-        if(valorDado == 20){
-            jogador().vida -= denji.inv[0].rollDamage() + denji.inv[0].rollDamage() + denji.getMod(denji.inv[0].attribute)
-
-        }else{
-            jogador().vida -=  denji.inv[0].rollDamage() + denji.getMod(denji.inv[0].attribute)
-            
-        }
-        if(jogador().vida <= 0){
-            alert("VOCÊ MORREU");
-            sair();
-        }
-    }
-    barraHP.style.height = ` ${(jogador().vida)/ (jogador().lvl * (10 + jogador().modCon))*100}%`;
-    barraInimigoHP.style.width = `${(denji.vida)/ (denji.lvl * (10 + denji.modCon))*100}%`;
+    denjiBate();
     
 }
 function esquivar(){
