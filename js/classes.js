@@ -4,13 +4,16 @@ class Personagem{
     #genero;
     #CA;
     #hp;
+    #money;
+    #inventario;
     #forca;
     #destreza;
     #constituicao;
     #inteligencia;
     #sabedoria;
     #carisma;
-    #inventario
+
+    
     constructor(anick,alevel,atributos,agenero,ainventario){
         this.#nick = anick;
         this.#level = alevel;
@@ -24,6 +27,7 @@ class Personagem{
         this.#CA = 10 + this.modDex;
         this.#hp = this.lvl*(10 + this.modCon);
         this.#inventario = ainventario;
+        this.#money = 100;
     }
 
     get nome(){
@@ -64,6 +68,9 @@ class Personagem{
     set inv(ainv){
         this.#inventario.push(ainv);
     }
+    set dinheiro(adinheiro){
+        this.#money = adinheiro;
+    }
 
     get modFor(){
         return Math.floor((this.#forca-10)/2);
@@ -94,6 +101,9 @@ class Personagem{
     }
     get inv(){
         return this.#inventario;
+    }
+    get dinheiro(){
+        return this.#money;
     }
 
 
@@ -169,22 +179,22 @@ class Personagem{
 
 class Arma{
 
-    #tipo;
+    #nome;
     #dano;
     #valor;
     #atributo;
 
-    constructor(atipo,adano,avalor,aatributo){
-        this.#tipo = atipo;
+    constructor(anome,adano,avalor,aatributo){
+        this.#nome = anome;
         this.#dano = adano;
         this.#valor = avalor;
         this.#atributo = aatributo;
     }
     get type(){
-        return this.#tipo;
+        return this.#nome;
     }
     set type(atipo){
-        this.#tipo = atipo;
+        this.#nome = atipo;
     }
 
     get damage(){

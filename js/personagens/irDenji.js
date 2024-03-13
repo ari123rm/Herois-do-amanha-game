@@ -195,7 +195,205 @@ function dandoEmCima(){
     }
 }
 
+function apostandoCorrida(){
+    if((jogador().roll("Car") > denji.DT("Sab") && denji.reputation >= 25) || (jogador().gender == "F")){
+        reputacao(15);
+        mudarSprite(3);
+        mudarFala("Não existe um mundo que você me vença numa corrida xD");
+        mudarEscolhas("Você vai comer poeira(iniciar corrida)","Sou conhecida como Seninha pela minha velocidade(iniciar corrida)","Ado ado quem ficar para trás é viado!(iniciar corrida)");
+        escolha_1.onclick = corrida;
+        escolha_2.onclick = corrida;
+        escolha_3.onclick = corrida;
+    }else{
+        reputacao(-15);
+        mudarSprite(2);
+        mudarFala("ACHA QUE ME ENGANA SEU MERDA?");
+        mudarEscolhas("CALMA EU SOU DA AGÊNCIA DO TEMPO!","Eu sou seu pai","Bom... Eu tentei resolver na conversa *lutar");
+        escolha_1.onclick = herois;
+        escolha_2.onclick = pai;
+        escolha_3.onclick = luta;
+    }
+}
+//mecanica de corrida
+let run = false;
+let jogadorCorre = 0,denjiCorre = 0;
+//mecanicas
+function correr(quem){
+    if(quem == jogador().nome){
+        jogadorCorre += jogador().modDex + dado(20);
+        barraHP.style.height = ` ${jogadorCorre}%`;
+    }
+    if(quem == denji.nome){
+        denjiCorre += dado(10);
+        barraInimigoHP.style.width = `${denjiCorre}%`;
+    }
+}   
+function atrapalhar(quem){
+    if(quem == jogador().nome){
+        jogadorCorre -= dado(20)
+        barraHP.style.height = ` ${jogadorCorre}%`;
+    }
+    if(quem == denji.nome){
+        denjiCorre -= dado(20)
+        barraInimigoHP.style.width = `${denjiCorre}%`;
+    }
+   
+   
 
+}
+function corrida(){
+    mudarSprite(-1);
+    barraInimigo.style.display = "grid";
+    barraInimigoHP.style.width = `${denjiCorre}%`;
+    barraInimigoNome.innerText = denji.nome;
+    barraHP.style.height = ` ${jogadorCorre}%`;
+    if(!run)mudarFala("(Aperte o botao correr antes que o Denji ganhe de você)");
+    run = true;
+    let denjiCorrendo = setInterval(() => {
+        correr(denji.nome);
+        if(denjiCorre >= 100){
+            
+            denjiCorre = 100;
+            mudarFala("ACHEI FACIL SEU LIXO HAHAHAHAHAHHAHAHAHAHAHAHA");
+            mudarEscolhas("sair","sair","sair");
+            escolha_1.onclick = sair;
+            escolha_2.onclick = sair;
+            escolha_3.onclick = sair;           
+        }
+    },1000);
+    let testandoCorrida = setInterval(()=>{
+        if(denjiCorre >= 100){
+            clearInterval(denjiCorrendo);
+            
+        }
+        console.log("vivo")
+    },1000);
+    function disputaCorre(){
+        if(jogadorCorre >=100){
+            jogadorCorre = 100;
+            clearInterval(denjiCorrendo);
+            mudarFala("ARF ARF ARF ARF COMOOOOO???? COMO VOCÊ VENCEU? . . . . . . . . . . . . Quer saber! FODASE! Adeus *Denji se retira");
+            mudarEscolhas("sair","sair","sair");
+            escolha_1.onclick = sair;
+            escolha_2.onclick = sair;
+            escolha_3.onclick = sair;
+        }else{
+            switch(dado(6)){
+                case 1:
+                    mudarEscolhas("CORRER","CAIR","ATRAPALHAR");
+                    escolha_1.onclick = () => {
+                        correr(jogador().nome);
+                        disputaCorre();
+                    };
+                    escolha_2.onclick = () => {
+                        atrapalhar(jogador().nome)
+                        disputaCorre();
+                    };
+                    escolha_3.onclick = () => {
+                        atrapalhar(denji.nome)
+                        disputaCorre();
+                    };
+                    break;
+                case 2:
+                    mudarEscolhas("CAIR","CORRER","ATRAPALHAR");
+                    escolha_1.onclick = () => {
+                        atrapalhar(jogador().nome)
+                        disputaCorre();
+                    };
+                    escolha_2.onclick = () => {
+                        correr(jogador().nome)
+                        disputaCorre();
+                    };
+                    escolha_3.onclick = () => {
+                        atrapalhar(denji.nome)
+                        disputaCorre();
+                    };
+                    break;
+                case 3:
+                    mudarEscolhas("ATRAPALHAR","CAIR","CORRER");
+                    escolha_1.onclick = () => {
+                        atrapalhar(denji.nome)
+                        disputaCorre();
+                    };
+                    escolha_2.onclick = () => {
+                        atrapalhar(jogador().nome)
+                        disputaCorre();
+                    };
+                    escolha_3.onclick = () => {
+                        correr(jogador().nome)
+                        disputaCorre();
+                    };
+                    break;
+                case 4:
+                    mudarEscolhas("ATRAPALHAR","CORRER","CAIR");
+                    escolha_1.onclick = () => {
+                        atrapalhar(denji.nome)
+                        disputaCorre();
+                    };
+                    escolha_2.onclick = () => {
+                        correr(jogador().nome)
+                        disputaCorre();
+                    };
+                    escolha_3.onclick = () => {
+                        atrapalhar(jogador().nome)
+                        disputaCorre();
+                    };
+                    break;
+                case 5:
+                    mudarEscolhas("CAIR","ATRAPALHAR","CORRER");
+                    escolha_1.onclick = () => {
+                        atrapalhar(jogador().nome)
+                        disputaCorre();
+                    };
+                    escolha_2.onclick = () => {
+                        atrapalhar(denji.nome)
+                        disputaCorre();
+                    };
+                    escolha_3.onclick = () => {
+                        correr(jogador().nome)
+                        disputaCorre();
+                    };
+                    break;
+                case 6:
+                    mudarEscolhas("CORRER","ATRAPALHAR","CAIR");
+                    escolha_1.onclick = () => {
+                        correr(jogador().nome)
+                        disputaCorre();
+                    };
+                    escolha_2.onclick = () => {
+                        
+                        atrapalhar(denji.nome)
+                        disputaCorre();
+                    };
+                    escolha_3.onclick = () => {
+                        atrapalhar(jogador().nome)
+                        disputaCorre();
+                    };
+                    break;
+                default:
+                    mudarEscolhas("CORRER","ATRAPALHAR","CAIR");
+                    escolha_1.onclick = () => {
+                        atrapalhar(denji.nome)
+                        disputaCorre();
+                    };
+                    escolha_2.onclick = () => {
+                        correr(jogador().nome)
+                        disputaCorre();
+                    };
+                    escolha_3.onclick = () => {
+                        atrapalhar(jogador().nome)
+                        disputaCorre();
+                    };
+                    break;
+
+            }
+        }
+    }
+    disputaCorre();
+    
+
+       
+}
 
 
 
