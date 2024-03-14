@@ -1,11 +1,12 @@
 class Personagem{
     #nick;
     #level;
-    #genero;
+    #gender;
     #CA;
     #hp;
     #money;
     #inventario;
+
     #forca;
     #destreza;
     #constituicao;
@@ -23,27 +24,20 @@ class Personagem{
         this.#inteligencia = atributos[3];
         this.#sabedoria = atributos[4];
         this.#carisma = atributos[5];
-        this.#genero = agenero;
+        this.#gender = agenero;
         this.#CA = 10 + this.modDex;
         this.#hp = this.lvl*(10 + this.modCon);
         this.#inventario = ainventario;
         this.#money = 100;
     }
 
-    get nome(){
-        return this.#nick;
-    }
+   //SETS
     set nome(anick){
         this.#nick = anick;
-    }
-
-    get lvl(){
-        return this.#level;
     }
     set lvl(alvl){
         this.#level = alvl;
     }
-
     set for(afor){
         this.#forca = aforca; 
     }
@@ -72,6 +66,7 @@ class Personagem{
         this.#money = adinheiro;
     }
 
+    //GETS
     get modFor(){
         return Math.floor((this.#forca-10)/2);
     }
@@ -90,8 +85,8 @@ class Personagem{
     get modCar(){
         return Math.floor((this.#carisma-10)/2);
     }
-    get gender(){
-        return this.#genero;
+    get genero(){
+        return this.#gender;
     }
     get armor(){
         return this.#CA;
@@ -105,8 +100,14 @@ class Personagem{
     get dinheiro(){
         return this.#money;
     }
+    get nome(){
+        return this.#nick;
+    }
+    get lvl(){
+        return this.#level;
+    }
 
-
+    //Metodos
     DT(atribute){
         switch(atribute){
             case "For":

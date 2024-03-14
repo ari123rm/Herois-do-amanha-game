@@ -50,6 +50,7 @@ function reputacao(value){
 }
 
 // conversando com denji
+let verificandoReputacao;
 export function falando_Denji(){
     //aparecendo as falas :D
     falas.style.display = "flex";
@@ -57,28 +58,34 @@ export function falando_Denji(){
     barraHP.style.height = ` ${(jogador().vida)/ (jogador().lvl * (10 + jogador().modCon))*100}%`;
     barraREPvalue.style.width = `${denji.reputation}%`;
     //setando reputação
-    if(jogador.gender == "F")reputacao(25);
+    if(jogador.genero == "F")reputacao(25);
     //primeira interação
     mudarFala("RAN DAM DAM DAM DAM");
     mudarEscolhas("Quem é você??? (Car)","*fugir* (For)",`${denji.nome}??? (Car)`);
     escolha_1.onclick = quemEhVc;
     escolha_2.onclick = fugir;
     escolha_3.onclick = sabiaQuemEra;
+
+    verificandoReputacao = setInterval(()=>{
+        if(denji.reputation <= 0){
+            luta();
+        }
+    },1000);
 }
 
 function quemEhVc(){
-    if(jogador().roll("Car") < denji.DT("Sab") && jogador().gender != "F"){
+    if(jogador().roll("Car") < denji.DT("Sab") && jogador().genero != "F"){
         reputacao(-15);
         mudarSprite(7);
         mudarFala("Quem sou eu??? Me diga quem é você ou vou te cortar ao meio!");
-        mudarEscolhas(`Foi mal... Sou ${jogador().nome}`,"Eu que vou te cortar! Seu merda!",`Pera... Você é o ${denji.nome}? (Car)`);
+        mudarEscolhas(`Foi mal... Sou ${jogador().nome}`,"Eu que vou te cortar! Seu merda! *luta",`Pera... Você é o ${denji.nome}? (Car)`);
         escolha_1.onclick = saudacao;
         escolha_2.onclick = luta;
         escolha_3.onclick = sabiaQuemEra;
     }else{
         reputacao(10);
         mudarSprite(3);
-        if(jogador().gender == "F"){ mudarFala(`Deixa eu tirar a Armadura aki... Eu sou ${denji.nome}, e qual o nome dessa gatinha ? *leve sorriso sedutor`) }
+        if(jogador().genero == "F"){ mudarFala(`Deixa eu tirar a Armadura aki... Eu sou ${denji.nome}, e qual o nome dessa gatinha ? *leve sorriso sedutor`) }
         else{mudarFala(`Meu nome é ${denji.nome}, mais conhecido como CHAINSAWMAN, e o seu?`);}
         mudarEscolhas(`Eu sou ${jogador().nome}`,`${denji.nome}...Acho que já ouvi falar...(Car)`,"Então é esse o nome que vai ta na minha aliança?");
         escolha_1.onclick = saudacao;
@@ -90,13 +97,13 @@ function quemEhVc(){
 function fugir(){
     if(jogador().roll("For") < denji.DT("For")){
         reputacao(-25);
-        if(jogador().gender != "F"){
+        if(jogador().genero != "F"){
             if(denji.reputation < 15){
                 luta();
             }else{
                 mudarSprite(4);
                 mudarFala(`Ta pensando que vai aonde? Foge não! *${denji.nome} te segurou*`);
-                mudarEscolhas("Me solta! *tentar se soltar* (For)","Tava so apostando corrida com você :D","*Lutar");
+                mudarEscolhas("Me solta! *tentar se soltar* (For)","Tava so apostando corrida com você :D(Car)","*Lutar");
                 escolha_1.onclick = fugir;
                 escolha_2.onclick = apostandoCorrida;
                 escolha_3.onclick = luta;
@@ -104,7 +111,7 @@ function fugir(){
         }else{
             mudarSprite(2);
             mudarFala(`Porque as gostosas sempre fogem de mim??? *${denji.nome} te segurou*`)
-            mudarEscolhas("Me solta! *tentar se soltar* (For)","Tava so apostando corrida com você :D","*Lutar");
+            mudarEscolhas("Me solta! *tentar se soltar* (For)","Tava so apostando corrida com você :D (Car)","*Lutar");
                 escolha_1.onclick = fugir;
                 escolha_2.onclick = apostandoCorrida;
                 escolha_3.onclick = luta;
@@ -121,7 +128,8 @@ function fugir(){
 }
 
 function sabiaQuemEra(){
-    if(jogador().roll("Car") < denji.DT("Sab") && jogador().gender != 'F'){
+    if(jogador().roll("Car") < denji.DT("Sab") && jogador().genero != 'F'){
+        reputacao(-20);
         mudarSprite(4)
         mudarFala("E COMO CARALHOS VOCÊ SABIA MEU NOME??? MORRA SEU ESQUISITO!")
         mudarEscolhas("*lutar", "CALMA CARA! EU SEI DO DESENHO LA", "RELAXA! VOCÊ NÃO É UM HERÓI DO AMANHÃ????");
@@ -129,26 +137,29 @@ function sabiaQuemEra(){
         escolha_2.onclick = anime;
         escolha_3.onclick = herois;
     }else{
-        if(jogador().gender == 'F'){
+        if(jogador().genero == 'F'){
+            reputacao(10)
             mudarSprite(5);
             mudarFala(". . . . . . . . . . . . . . . . . \n Acho que me apaixonei UwU que gatinha ein");
-            mudarEscolhas("Eu tambêm <3 \n *se aproximar para beijo","Sem querer magoar, mas... não","Ta maluco? Eu sou homem!");
+            mudarEscolhas("Eu tambêm <3 \n *se aproximar para beijo","Sem querer magoar, mas... não","Ta maluco? Eu sou homem!(Car)");
             escolha_1.onclick = beijo;
             escolha_2.onclick = deuFora;
             escolha_3.onclick = virouHomem;
         }else{
+            reputacao(10)
             mudarSprite(6)
             mudarFala("Uau você me conhece :) Mas . . . . . . . como?");
-            mudarEscolhas("Não posso esquecer o sorriso mais lindo do mundo UwU", "Do desenho lá", "Do melhor RPG do mundo Heróis do Amanhã");
+            mudarEscolhas("Não posso esquecer o sorriso mais lindo do mundo UwU", "Do desenho lá", "Você não é um Herói do Amanhã?");
             escolha_1.onclick = dandoEmCima;
             escolha_2.onclick = anime;
             escolha_3.onclick = herois;
         }
     }
 }
+
 function saudacao(){
 
-    if(jogador().gender == 'F'){
+    if(jogador().genero == 'F'){
         mudarSprite(6);
         mudarFala(`${jogador().nome}. . . . . Acho que vai ficar bonito na certidão de casamento da gente`);
         mudarEscolhas("Esquisito","*Fugir","Melhor ainda na certidão de nascimento do nosso filho");
@@ -166,7 +177,7 @@ function saudacao(){
 }
 
 function dandoEmCima(){
-    if(jogador().gender == "F"){
+    if(jogador().genero == "F"){
         reputacao(50);
         mudarSprite(5);
         mudarFala("Pochita... Acho que é ela... Você é a garota certa!");
@@ -175,7 +186,7 @@ function dandoEmCima(){
         escolha_2.onclick = deuFora;
         escolha_3.onclick = casamento;
     }else{
-        if(jogador().gender =="M"){
+        if(jogador().genero =="M"){
             reputacao(-50);
             mudarSprite(2);
             mudarFala("TA MALUCO FILHA DA PUTA!!! EU SOU HOMEM CARALHO! *barulhos de motosserra");
@@ -184,7 +195,7 @@ function dandoEmCima(){
             escolha_2.onclick = fugir;
             escolha_3.onclick = virouMulher;
         }
-        if(jogador().gender == "N"){
+        if(jogador().genero == "N"){
             mudarSprite(1);
             mudarFala("Isso era para ser um elogio?");
             mudarEscolhas("NÃO ACEITA UM ELOGIO? *lutar", "Desculpaaaaaa... (correr com vergonha)","Eu sou mulher! >.< (car)");
@@ -196,7 +207,7 @@ function dandoEmCima(){
 }
 
 function apostandoCorrida(){
-    if((jogador().roll("Car") > denji.DT("Sab") && denji.reputation >= 25) || (jogador().gender == "F")){
+    if((jogador().roll("Car") > denji.DT("Sab") && denji.reputation >= 25) || (jogador().genero == "F")){
         reputacao(15);
         mudarSprite(3);
         mudarFala("Não existe um mundo que você me vença numa corrida xD");
@@ -208,16 +219,110 @@ function apostandoCorrida(){
         reputacao(-15);
         mudarSprite(2);
         mudarFala("ACHA QUE ME ENGANA SEU MERDA?");
-        mudarEscolhas("CALMA EU SOU DA AGÊNCIA DO TEMPO!","Eu sou seu pai","Bom... Eu tentei resolver na conversa *lutar");
+        mudarEscolhas("CALMA EU SOU DA AGÊNCIA DO TEMPO!(Car)","Eu sou seu pai(Car)","Bom... Eu tentei resolver na conversa *lutar");
         escolha_1.onclick = herois;
         escolha_2.onclick = pai;
         escolha_3.onclick = luta;
     }
 }
+
+function pai(){
+    if(jogador().roll("Car") >= denji.DT("Sab")){
+        mudarSprite(5);
+        mudarFala("P-Pai?");
+        mudarEscolhas("To te sacaneando rsrsrs, sou da agência do tempo","KKKKKKKKKKKKKKKKKKKKKKK cara otario, mas não. . . Vim acabar com o ART","Agora sinta meu poder *posição de luta e lutar");
+        escolha_1.onclick = herois;
+        escolha_2.onclick = herois;
+        escolha_3.onclick = luta;
+    }else{
+        mudarSprite(2);
+        mudarFala("VAI TOMAR NO CU SEU MERDA");
+        mudarEscolhas("lutar","lutar","lutar");
+        escolha_1.onclick = luta;
+        escolha_2.onclick = luta;
+        escolha_3.onclick = luta;
+    }
+}
+
+function anime(){
+    reputacao(-10);
+    mudarSprite(1);
+    mudarFala("Desenho?. . . . . . . . . Eu sou bem real para falar a verdade");
+    mudarEscolhas("Desculpa, confundi xD. Você é um héroi do amanhã né","Esquece, vim pedir ajuda para acabar com ART", "É... agora que falou, é bem real mesmo xD, vim ajudar os Heróis do Amanhã");
+    escolha_1.onclick = herois;
+    escolha_2.onclick = herois;
+    escolha_3.onclick = herois;
+}
+
+function beijo(){
+    if(jogador().genero == "F"){
+        reputacao(50);
+        mudarSprite(-1);
+        let quantidadeBeijo = 1;
+            function falasBeijo(){
+                switch(quantidadeBeijo){
+                    case 1:
+                        mudarFala(`*${denji.nome} se aproxima dos seus lábios e com um toque suave vocês se beijam`);
+                        break;
+                    case 2:
+                        mudarFala(`*${denji.nome} te pega pela cintura e o beijo se extende`);
+                        break;
+                    case 3:
+                        mudarFala(`*A mão dele desliza pelo seu corpo te dando leve arrepios de prazer`);
+                        break;
+                    case 4:
+                        mudarFala(`*O mundo parece parar, seus olhares após o beijo são de amor e desejo`);
+                        break;
+                    case 5:
+                        mudarFala(`*Seu corpo para de responder ao cerebro, querendo apenas mais o calor do ${denji.nome}`);
+                        break;
+                    case 6:
+                        mudarFala(`*O romance entre vocês dois parece ter uma conexão além da carnal, o beijo é maravilhoso`);
+                        break;
+                    case 7:
+                        mudarFala(`*Sua saliva começa a se esgotar de tanto beijar, mas seus sentimentos ficaram mais fortes`);
+                        break;
+                    default:
+                        mudarFala(`(MESTRE) pfv para de beijar ta ficando esquisito ;-;`);
+                        break;
+                }
+            }
+            falasBeijo();
+            mudarEscolhas(`${denji.nome}. . . . aceita casar comigo?`, "*beijar novamente", "Desculpa... Mas eu preciso focar no meu objetivo. . . DERROTAR O ART! (Car)");
+            escolha_1.onclick = casamento;
+            escolha_2.onclick = falasBeijo;
+            escolha_3.onclick = herois;
+    }else{
+        luta();
+    }
+}
+
+function deuFora(){
+    reputacao(-5)
+    mudarSprite(1);
+    mudarFala(". . . . . . . . . . . . . .");
+    mudarEscolhas("Sou da agência, e vim acabar o ART","Precisamos acabar com o ART", "Eu não queria que fosse assim nosso encontro. . . Mas eu preciso acabar com o ART");
+    escolha_1.onclick = herois;
+    escolha_2.onclick = herois; 
+    escolha_3.onclick = herois;
+
+}
+
+
+//lore principal
+function herois(){
+    
+}
+
+
+
+
+
+
 //mecanica de corrida
 let run = false;
 let jogadorCorre = 0,denjiCorre = 0;
-//mecanicas
+
 function correr(quem){
     if(quem == jogador().nome){
         jogadorCorre += jogador().modDex + dado(20);
@@ -241,6 +346,127 @@ function atrapalhar(quem){
    
 
 }
+function disputaCorre(){
+    if(jogadorCorre >=100){
+        jogadorCorre = 100;
+        clearInterval(denjiCorrendo);
+        mudarFala("ARF ARF ARF ARF COMOOOOO???? COMO VOCÊ VENCEU? . . . . . . . . . . . . Quer saber! FODASE! Adeus *Denji se retira");
+        mudarEscolhas("sair","sair","sair");
+        escolha_1.onclick = sair;
+        escolha_2.onclick = sair;
+        escolha_3.onclick = sair;
+    }else{
+        switch(dado(6)){
+            case 1:
+                mudarEscolhas("CORRER","CAIR","ATRAPALHAR");
+                escolha_1.onclick = () => {
+                    correr(jogador().nome);
+                    disputaCorre();
+                };
+                escolha_2.onclick = () => {
+                    atrapalhar(jogador().nome)
+                    disputaCorre();
+                };
+                escolha_3.onclick = () => {
+                    atrapalhar(denji.nome)
+                    disputaCorre();
+                };
+                break;
+            case 2:
+                mudarEscolhas("CAIR","CORRER","ATRAPALHAR");
+                escolha_1.onclick = () => {
+                    atrapalhar(jogador().nome)
+                    disputaCorre();
+                };
+                escolha_2.onclick = () => {
+                    correr(jogador().nome)
+                    disputaCorre();
+                };
+                escolha_3.onclick = () => {
+                    atrapalhar(denji.nome)
+                    disputaCorre();
+                };
+                break;
+            case 3:
+                mudarEscolhas("ATRAPALHAR","CAIR","CORRER");
+                escolha_1.onclick = () => {
+                    atrapalhar(denji.nome)
+                    disputaCorre();
+                };
+                escolha_2.onclick = () => {
+                    atrapalhar(jogador().nome)
+                    disputaCorre();
+                };
+                escolha_3.onclick = () => {
+                    correr(jogador().nome)
+                    disputaCorre();
+                };
+                break;
+            case 4:
+                mudarEscolhas("ATRAPALHAR","CORRER","CAIR");
+                escolha_1.onclick = () => {
+                    atrapalhar(denji.nome)
+                    disputaCorre();
+                };
+                escolha_2.onclick = () => {
+                    correr(jogador().nome)
+                    disputaCorre();
+                };
+                escolha_3.onclick = () => {
+                    atrapalhar(jogador().nome)
+                    disputaCorre();
+                };
+                break;
+            case 5:
+                mudarEscolhas("CAIR","ATRAPALHAR","CORRER");
+                escolha_1.onclick = () => {
+                    atrapalhar(jogador().nome)
+                    disputaCorre();
+                };
+                escolha_2.onclick = () => {
+                    atrapalhar(denji.nome)
+                    disputaCorre();
+                };
+                escolha_3.onclick = () => {
+                    correr(jogador().nome)
+                    disputaCorre();
+                };
+                break;
+            case 6:
+                mudarEscolhas("CORRER","ATRAPALHAR","CAIR");
+                escolha_1.onclick = () => {
+                    correr(jogador().nome)
+                    disputaCorre();
+                };
+                escolha_2.onclick = () => {
+                    
+                    atrapalhar(denji.nome)
+                    disputaCorre();
+                };
+                escolha_3.onclick = () => {
+                    atrapalhar(jogador().nome)
+                    disputaCorre();
+                };
+                break;
+            default:
+                mudarEscolhas("CORRER","ATRAPALHAR","CAIR");
+                escolha_1.onclick = () => {
+                    atrapalhar(denji.nome)
+                    disputaCorre();
+                };
+                escolha_2.onclick = () => {
+                    correr(jogador().nome)
+                    disputaCorre();
+                };
+                escolha_3.onclick = () => {
+                    atrapalhar(jogador().nome)
+                    disputaCorre();
+                };
+                break;
+
+        }
+    }
+}
 function corrida(){
     mudarSprite(-1);
     barraInimigo.style.display = "grid";
@@ -249,6 +475,8 @@ function corrida(){
     barraHP.style.height = ` ${jogadorCorre}%`;
     if(!run)mudarFala("(Aperte o botao correr antes que o Denji ganhe de você)");
     run = true;
+    const timer = 500;
+
     let denjiCorrendo = setInterval(() => {
         correr(denji.nome);
         if(denjiCorre >= 100){
@@ -260,135 +488,14 @@ function corrida(){
             escolha_2.onclick = sair;
             escolha_3.onclick = sair;           
         }
-    },1000);
+    },timer);
     let testandoCorrida = setInterval(()=>{
         if(denjiCorre >= 100){
             clearInterval(denjiCorrendo);
-            
         }
         console.log("vivo")
-    },1000);
-    function disputaCorre(){
-        if(jogadorCorre >=100){
-            jogadorCorre = 100;
-            clearInterval(denjiCorrendo);
-            mudarFala("ARF ARF ARF ARF COMOOOOO???? COMO VOCÊ VENCEU? . . . . . . . . . . . . Quer saber! FODASE! Adeus *Denji se retira");
-            mudarEscolhas("sair","sair","sair");
-            escolha_1.onclick = sair;
-            escolha_2.onclick = sair;
-            escolha_3.onclick = sair;
-        }else{
-            switch(dado(6)){
-                case 1:
-                    mudarEscolhas("CORRER","CAIR","ATRAPALHAR");
-                    escolha_1.onclick = () => {
-                        correr(jogador().nome);
-                        disputaCorre();
-                    };
-                    escolha_2.onclick = () => {
-                        atrapalhar(jogador().nome)
-                        disputaCorre();
-                    };
-                    escolha_3.onclick = () => {
-                        atrapalhar(denji.nome)
-                        disputaCorre();
-                    };
-                    break;
-                case 2:
-                    mudarEscolhas("CAIR","CORRER","ATRAPALHAR");
-                    escolha_1.onclick = () => {
-                        atrapalhar(jogador().nome)
-                        disputaCorre();
-                    };
-                    escolha_2.onclick = () => {
-                        correr(jogador().nome)
-                        disputaCorre();
-                    };
-                    escolha_3.onclick = () => {
-                        atrapalhar(denji.nome)
-                        disputaCorre();
-                    };
-                    break;
-                case 3:
-                    mudarEscolhas("ATRAPALHAR","CAIR","CORRER");
-                    escolha_1.onclick = () => {
-                        atrapalhar(denji.nome)
-                        disputaCorre();
-                    };
-                    escolha_2.onclick = () => {
-                        atrapalhar(jogador().nome)
-                        disputaCorre();
-                    };
-                    escolha_3.onclick = () => {
-                        correr(jogador().nome)
-                        disputaCorre();
-                    };
-                    break;
-                case 4:
-                    mudarEscolhas("ATRAPALHAR","CORRER","CAIR");
-                    escolha_1.onclick = () => {
-                        atrapalhar(denji.nome)
-                        disputaCorre();
-                    };
-                    escolha_2.onclick = () => {
-                        correr(jogador().nome)
-                        disputaCorre();
-                    };
-                    escolha_3.onclick = () => {
-                        atrapalhar(jogador().nome)
-                        disputaCorre();
-                    };
-                    break;
-                case 5:
-                    mudarEscolhas("CAIR","ATRAPALHAR","CORRER");
-                    escolha_1.onclick = () => {
-                        atrapalhar(jogador().nome)
-                        disputaCorre();
-                    };
-                    escolha_2.onclick = () => {
-                        atrapalhar(denji.nome)
-                        disputaCorre();
-                    };
-                    escolha_3.onclick = () => {
-                        correr(jogador().nome)
-                        disputaCorre();
-                    };
-                    break;
-                case 6:
-                    mudarEscolhas("CORRER","ATRAPALHAR","CAIR");
-                    escolha_1.onclick = () => {
-                        correr(jogador().nome)
-                        disputaCorre();
-                    };
-                    escolha_2.onclick = () => {
-                        
-                        atrapalhar(denji.nome)
-                        disputaCorre();
-                    };
-                    escolha_3.onclick = () => {
-                        atrapalhar(jogador().nome)
-                        disputaCorre();
-                    };
-                    break;
-                default:
-                    mudarEscolhas("CORRER","ATRAPALHAR","CAIR");
-                    escolha_1.onclick = () => {
-                        atrapalhar(denji.nome)
-                        disputaCorre();
-                    };
-                    escolha_2.onclick = () => {
-                        correr(jogador().nome)
-                        disputaCorre();
-                    };
-                    escolha_3.onclick = () => {
-                        atrapalhar(jogador().nome)
-                        disputaCorre();
-                    };
-                    break;
-
-            }
-        }
-    }
+    },timer);
+    
     disputaCorre();
     
 
@@ -396,30 +503,29 @@ function corrida(){
 }
 
 
-
 //mecanica de luta
-
-function denjiBate(){
-        let valorDado = dado(20);
-        if(valorDado + denji.getMod(denji.inv[0].attribute) + Math.floor(denji.lvl/2) >= jogador().armor){
-            if(valorDado == 20){
-                jogador().vida -= denji.inv[0].rollDamage() + denji.inv[0].rollDamage() + denji.getMod(denji.inv[0].attribute)
-    
-            }else{
-                jogador().vida -=  denji.inv[0].rollDamage() + denji.getMod(denji.inv[0].attribute)
-                
-            }
-            if(jogador().vida <= 0){
-                alert("VOCÊ MORREU");
-                sair();
-            }
-        }
-        barraHP.style.height = ` ${(jogador().vida)/ (jogador().lvl * (10 + jogador().modCon))*100}%`;
-        barraInimigoHP.style.width = `${(denji.vida)/ (denji.lvl * (10 + denji.modCon))*100}%`;
-}
 let lutando = false;
 const barraInimigoNome = document.querySelector("#barraINIMIGO p");
+function denjiBate(){
+    let valorDado = dado(20);
+    if(valorDado + denji.getMod(denji.inv[0].attribute) + Math.floor(denji.lvl/2) >= jogador().armor){
+        if(valorDado == 20){
+            jogador().vida -= denji.inv[0].rollDamage() + denji.inv[0].rollDamage() + denji.getMod(denji.inv[0].attribute)
+
+        }else{
+            jogador().vida -=  denji.inv[0].rollDamage() + denji.getMod(denji.inv[0].attribute)
+            
+        }
+        if(jogador().vida <= 0){
+            alert("VOCÊ MORREU");
+            sair();
+        }
+    }
+    barraHP.style.height = ` ${(jogador().vida)/ (jogador().lvl * (10 + jogador().modCon))*100}%`;
+    barraInimigoHP.style.width = `${(denji.vida)/ (denji.lvl * (10 + denji.modCon))*100}%`;
+}
 function luta(){
+    clearInterval(verificandoReputacao);
     if(lutando){
         mudarFala("RESOLVE COMO MACHO ESSA PORRA");
         denjiBate()
@@ -527,5 +633,5 @@ function bater(){
     
 }
 function esquivar(){
-
+     
 }
