@@ -251,13 +251,13 @@
     font-size: 22px;
     width: 27%;
 }
-#inventario #inv-itens ol{
+#inventario #inv-itens li{
     margin-bottom: 4%;
     display: inline-flex;
     width: 100%;
     justify-content: center;
 }
-#inventario #inv-itens ol button{
+#inventario #inv-itens li button{
     background-color: transparent;
     border: 0;
     font-size: 18px;

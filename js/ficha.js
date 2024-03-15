@@ -15,7 +15,7 @@ const inv_GEN = document.querySelector("#inv-GEN");
 const inv_money_value = document.querySelector("#inv-money-value");
 
 const inv_itens = document.querySelector("#inv-itens");
-const inv_itensOL = document.querySelectorAll("#inv-itens ol");
+const inv_itensOL = document.querySelectorAll("#inv-itens li");
 const inv_arma = document.querySelectorAll(".inv-arma");
 const inv_itens_subir = document.querySelectorAll(".inv-itens-subir");
 const inv_itens_descer = document.querySelectorAll(".inv-itens-descer");
