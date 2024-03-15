@@ -101,8 +101,8 @@ const inv_nome = document.querySelector("#inv-nome");
 const barraHpNome = document.querySelector("#barraHP p");
 
 //prota teste
-import { mao,arco } from "./objects.js";
-const protagonista = [new Save("Teste",7,[10,10,10,10,10,10],"M",[mao])];
+import * as armas from "./objects.js";
+const protagonista = [new Save("Teste",7,[10,10,10,10,10,10],"M",[armas.mao,armas.arco,armas.motosserra,armas.fuzil],[armas.roupa])];
 //função para criar o personagem jogavel
 function build_prota(){
     if(atributoPrincipal.value != "selecionePricipal" && atributoSecundario.value != "selecioneSecundario"  && nick.value != "" && atributoGenero.value != "selecioneGenero"){
@@ -114,7 +114,7 @@ function build_prota(){
                 }
                 atributos[atributoPrincipal.value] =atributos[atributoPrincipal.value] +2;
                 atributos[atributoSecundario.value] =atributos[atributoSecundario.value] +1;
-                protagonista.push(new Save(nick.value,1,atributos,atributoGenero.value,[mao]));
+                protagonista.push(new Save(nick.value,1,atributos,atributoGenero.value,[armas.mao],[armas.roupa]));
                 const nickSplit = nick.value.split(" ");
                 let espaco = "";
                 barraHpNome.innerText = "";

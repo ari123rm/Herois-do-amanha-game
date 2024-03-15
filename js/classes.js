@@ -15,7 +15,7 @@ class Personagem{
     #carisma;
 
     
-    constructor(anick,alevel,atributos,agenero,ainventario){
+    constructor(anick,alevel,atributos,agenero,aarma,aarmadura){
         this.#nick = anick;
         this.#level = alevel;
         this.#forca = atributos[0];
@@ -27,7 +27,10 @@ class Personagem{
         this.#gender = agenero;
         this.#CA = 10 + this.modDex;
         this.#hp = this.lvl*(10 + this.modCon);
-        this.#inventario = ainventario;
+        this.#inventario = {
+            armas : aarma,
+            armaduras: aarmadura
+        };
         this.#money = 100;
     }
 
@@ -60,7 +63,10 @@ class Personagem{
         this.#hp = ahp;
     }
     set inv(ainv){
-        this.#inventario.push(ainv);
+        this.#inventario.armas.push(ainv);
+    }
+    set invArmaduras(ainv){
+        this.#inventario.armaduras.push(ainv);
     }
     set dinheiro(adinheiro){
         this.#money = adinheiro;
@@ -95,7 +101,10 @@ class Personagem{
         return this.#hp;
     }
     get inv(){
-        return this.#inventario;
+        return this.#inventario.armas;
+    }
+    get invArmaduras(){
+        return this.#inventario.armaduras;
     }
     get dinheiro(){
         return this.#money;
@@ -177,7 +186,6 @@ class Personagem{
     }
 
 }
-
 class Arma{
 
     #nome;
@@ -231,7 +239,43 @@ class Arma{
         return `${this.type} | ${this.damage} | ${this.value} | ${this.attribute}`;
     }
 }
+class Armadura{
+    #nome;
+    #protection;
+    #valor;
+    #tipo
+    constructor(anome,aprotection,avalor,atipo){
+        this.#nome = anome;
+        this.#protection = aprotection;
+        this.#valor = avalor;
+        this.#tipo = atipo;
+    }
+    get nome(){
+        return this.#nome;
+    }
+    set nome(anome){
+        this.#nome = anome;
+    }
+    get protecao(){
+        return this.#protection;
+    }
+    set protecao(aprotection){
+        this.#protection = aprotection;
+    }
+    get value(){
+        return this.#valor;
+    }
+    set value(avalue){
+        this.#valor = avalue;
+    }
+    set type(atipo){
+        this.#tipo = atipo
+    }
+    get type(){
+        return this.#tipo;
+    }
 
+}
 class Npc extends Personagem{
     #reputacao
     constructor(anick,alevel,atributos,agenero,ainv){
@@ -250,8 +294,8 @@ class Npc extends Personagem{
 }
 class Save extends Personagem{
     #progresso
-    constructor(anick,alevel,atributos,agenero,ainv){
-        super(anick,alevel,atributos,agenero,ainv);
+    constructor(anick,alevel,atributos,agenero,aarma,aarmadura){
+        super(anick,alevel,atributos,agenero,aarma,aarmadura);
         this.#progresso = [];
     }
     get progress(){
@@ -262,7 +306,7 @@ class Save extends Personagem{
     }
 }
 
-export {Personagem,Arma,Save,Npc};
+export {Personagem,Arma,Save,Npc,Armadura};
 function dado(max) {
     return Math.floor(Math.random() * (max)) + 1;
 }

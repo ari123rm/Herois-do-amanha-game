@@ -2,14 +2,54 @@ const jogo = document.querySelector("#jogo");
 const mapa = document.querySelector("#inicio-mapa");
 const falas = document.querySelector("#falas");
 const sprites = document.querySelector("#sprites");
+const escolhas = document.querySelector("#escolhas");
+const imagem_sprite_Denji = document.querySelector("#sprites img");
+const texto_fala = document.querySelector("#textoFala");
+const escolha_1 = document.querySelector("#escolha-1");
+const escolha_2 = document.querySelector("#escolha-2");
+const escolha_3 = document.querySelector("#escolha-3");
 
 
 import {jogador} from "./criacao.js";
+//funções do joguinho kkk
+let lutaOn = false
+function mudarButoes(f1,f2,f3){
+    escolha_1.onclick = f1;
+    escolha_2.onclick = f2;
+    escolha_3.onclick = f3;
+}
+function mudarEscolhas(t1,t2 ,t3 , l = false){
+    if(l){
+        escolha_1.innerText = `Atacar com ${jogador().inv[0].type}`
+        escolha_2.innerText = "*fugir(For)"
+        escolha_3.innerText = "*esquivar(Dex)"
+        lutaOn = l;
+    }else{
+        escolha_1.innerText = t1;
+        escolha_2.innerText = t2;
+        escolha_3.innerText = t3;
+        lutaOn = l;
+    }
+   
+}
+function mudarFala(fala){
+    const falaSplit = fala.split('');
+    texto_fala.innerText = "";
+    
+    falaSplit.forEach((element,i) => {
+          setTimeout( () => {
+            texto_fala.innerHTML += element;
+            escolhas.style.display = "none";
+        }, 50 *i);
+    });
+    setTimeout(() =>{escolhas.style.display = "flex";}, 50 * falaSplit.length);
+}
 
+export {mudarButoes,mudarEscolhas,mudarFala};
 
 //abrindo inventario
 import { criarFicha } from "./ficha.js";
-let mapaAnterior,falaAberto;
+let mapaAnterior,falaAberto,salvarFala,salvarEscolhas;
 const abrir_inventario = document.querySelector("#abrir-inventario"); 
 const inventario = document.querySelector("#inventario");
 function salvar_mapaAnterior(mapinha){
@@ -39,7 +79,8 @@ function abrindo_inventario (){
             falaAberto = false;
         }
         jogo.style.backgroundImage = `url(${mapaAnterior})`;
-
+        mudarFala(salvarFala);
+        mudarEscolhas(...salvarEscolhas,lutaOn);
     }else{
         inventario.style.display = "flex";
         mapa.style.display = "none";
@@ -51,8 +92,12 @@ function abrindo_inventario (){
         }
         jogo.style.backgroundImage = "url(/imagens/fichaHerois.png)";
         criarFicha();
+        salvarFala = texto_fala.innerText;
+        salvarEscolhas = [escolha_1.innerText,escolha_2.innerText,escolha_3.innerText];
+
+        
     }
-}   
+}  
 abrir_inventario.onclick = abrindo_inventario;
 
 //Indo para Denji
