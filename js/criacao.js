@@ -101,8 +101,8 @@ const inv_nome = document.querySelector("#inv-nome");
 const barraHpNome = document.querySelector("#barraHP p");
 
 //prota teste
-import { mao } from "./objects.js";
-const protagonista = [new Save("Teste",7,[10,10,10,10,10,10],'M',[mao])];
+import { mao,arco } from "./objects.js";
+const protagonista = [new Save("Teste",7,[10,10,10,10,10,10],"M",[mao])];
 //função para criar o personagem jogavel
 function build_prota(){
     if(atributoPrincipal.value != "selecionePricipal" && atributoSecundario.value != "selecioneSecundario"  && nick.value != "" && atributoGenero.value != "selecioneGenero"){

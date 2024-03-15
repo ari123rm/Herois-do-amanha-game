@@ -58,7 +58,7 @@ export function falando_Denji(){
     barraHP.style.height = ` ${(jogador().vida)/ (jogador().lvl * (10 + jogador().modCon))*100}%`;
     barraREPvalue.style.width = `${denji.reputation}%`;
     //setando reputação
-    if(jogador.genero == "F")reputacao(25);
+    if(jogador().genero == "F")reputacao(25);
     //primeira interação
     mudarFala("RAN DAM DAM DAM DAM");
     mudarEscolhas("Quem é você??? (Car)","*fugir* (For)",`${denji.nome}??? (Car)`);
@@ -68,7 +68,7 @@ export function falando_Denji(){
 
     verificandoReputacao = setInterval(()=>{
         if(denji.reputation <= 0){
-            luta();
+            zerarReputacao();
         }
     },1000);
 }
@@ -227,7 +227,7 @@ function apostandoCorrida(){
 }
 
 function pai(){
-    if(jogador().roll("Car") >= denji.DT("Sab")){
+    if(jogador().roll("Car") > denji.DT("Sab")){
         mudarSprite(5);
         mudarFala("P-Pai?");
         mudarEscolhas("To te sacaneando rsrsrs, sou da agência do tempo","KKKKKKKKKKKKKKKKKKKKKKK cara otario, mas não. . . Vim acabar com o ART","Agora sinta meu poder *posição de luta e lutar");
@@ -255,7 +255,7 @@ function anime(){
 }
 
 function beijo(){
-    if(jogador().genero == "F"){
+    if(jogador().genero == "F" || generoBait == "F" ){
         reputacao(50);
         mudarSprite(-1);
         let quantidadeBeijo = 1;
@@ -287,11 +287,11 @@ function beijo(){
                         break;
                 }
             }
-            falasBeijo();
-            mudarEscolhas(`${denji.nome}. . . . aceita casar comigo?`, "*beijar novamente", "Desculpa... Mas eu preciso focar no meu objetivo. . . DERROTAR O ART! (Car)");
-            escolha_1.onclick = casamento;
-            escolha_2.onclick = falasBeijo;
-            escolha_3.onclick = herois;
+        falasBeijo();
+        mudarEscolhas(`${denji.nome}. . . . aceita casar comigo?`, "*beijar novamente", "Desculpa... Mas eu preciso focar no meu objetivo. . . DERROTAR O ART! (Car)");
+        escolha_1.onclick = casamento;
+        escolha_2.onclick = falasBeijo;
+        escolha_3.onclick = herois;
     }else{
         luta();
     }
@@ -305,12 +305,57 @@ function deuFora(){
     escolha_1.onclick = herois;
     escolha_2.onclick = herois; 
     escolha_3.onclick = herois;
+}
+//enganar o genero para o DENJI
+let generoBait;
+function virouHomem(){
+    if(jogador().roll("Car") >= denji.DT("Sab")){
+        reputacao(-5);
+        mudarSprite(1);
+        mudarFala("Ah. . . . Bom o que você veio fazer aki?");
+        mudarEscolhas("Eu vim ajudar contra o ART","Fui enviado para ajudar os Heróis do Amanhã","Algo me diz que você precisa de uma ajuda \n*Observar o corpo dele(Sab)");
+        escolha_1.onclick = herois;
+        escolha_2.onclick = herois; 
+        escolha_3.onclick = ajuda;
+        generoBait = "M";
+    }else{  
+        reputacao(-10);
+        mudarSprite(1);
+        mudarFala("Bom. . . . . . . . . . Seus peitos parecem bem de mulheres");
+        mudarEscolhas("Para de olhar para eles seu esquisito!","MORRA SEU TARADO *lutar","*fazer uma cara de raiva");
+        escolha_1.onclick = deuFora;
+        escolha_2.onclick = luta; 
+        escolha_3.onclick = deuFora;
+    }
+}
+function virouMulher(){
+    if(jogador().roll("Car") >= denji.DT("Sab")){
+        generoBait = "F";
+        reputacao(25)
+        mudarSprite(5);
+        mudarFala(`*${denji.nome} está boquiaberto com sua revelação`);
+        mudarEscolhas("Bom... mas esse não é caso de agora. Precisamos parar o ART","*Se aproximar de beija-lo","O que é isso? (Sab)");
+        escolha_1.onclick = herois;
+        escolha_2.onclick = beijo;
+        escolha_3.onclick = ajuda;
+    }else{
+        reputacao(-20);
+        mudarSprite(2);
+        mudarFala("TA QUERENDO ME ENGANAR *barulhos de motosserra");
+        mudarEscolhas("lutar","lutar","lutar");
+        escolha_1.onclick = luta;
+        escolha_2.onclick = luta;
+        escolha_3.onclick = luta;
+    }
+}
+function casamento(){
 
 }
-
-
 //lore principal
 function herois(){
+    
+}
+function ajuda(){
     
 }
 
@@ -322,11 +367,12 @@ function herois(){
 //mecanica de corrida
 let run = false;
 let jogadorCorre = 0,denjiCorre = 0;
-
+let denjiCorrendo ;
+let testandoCorrida;
 function correr(quem){
     if(quem == jogador().nome){
         jogadorCorre += jogador().modDex + dado(20);
-        barraHP.style.height = ` ${jogadorCorre}%`;
+        barraHP.style.height = `${jogadorCorre}%`;
     }
     if(quem == denji.nome){
         denjiCorre += dado(10);
@@ -336,15 +382,12 @@ function correr(quem){
 function atrapalhar(quem){
     if(quem == jogador().nome){
         jogadorCorre -= dado(20)
-        barraHP.style.height = ` ${jogadorCorre}%`;
+        barraHP.style.height = `${jogadorCorre}%`;
     }
     if(quem == denji.nome){
         denjiCorre -= dado(20)
         barraInimigoHP.style.width = `${denjiCorre}%`;
     }
-   
-   
-
 }
 function disputaCorre(){
     if(jogadorCorre >=100){
@@ -473,11 +516,11 @@ function corrida(){
     barraInimigoHP.style.width = `${denjiCorre}%`;
     barraInimigoNome.innerText = denji.nome;
     barraHP.style.height = ` ${jogadorCorre}%`;
-    if(!run)mudarFala("(Aperte o botao correr antes que o Denji ganhe de você)");
+    if(!run)mudarFala("CORRE");
     run = true;
     const timer = 500;
 
-    let denjiCorrendo = setInterval(() => {
+    denjiCorrendo = setInterval(() => {
         correr(denji.nome);
         if(denjiCorre >= 100){
             
@@ -486,14 +529,13 @@ function corrida(){
             mudarEscolhas("sair","sair","sair");
             escolha_1.onclick = sair;
             escolha_2.onclick = sair;
-            escolha_3.onclick = sair;           
+            escolha_3.onclick = sair;          
         }
     },timer);
-    let testandoCorrida = setInterval(()=>{
+    testandoCorrida = setInterval(()=>{
         if(denjiCorre >= 100){
             clearInterval(denjiCorrendo);
         }
-        console.log("vivo")
     },timer);
     
     disputaCorre();
@@ -524,6 +566,14 @@ function denjiBate(){
     barraHP.style.height = ` ${(jogador().vida)/ (jogador().lvl * (10 + jogador().modCon))*100}%`;
     barraInimigoHP.style.width = `${(denji.vida)/ (denji.lvl * (10 + denji.modCon))*100}%`;
 }
+function zerarReputacao(){
+    clearInterval(verificandoReputacao);
+    setTimeout(() => {mudarEscolhas("*Você zerou sua reputação, se prepare para lutar","*Você zerou sua reputação, se prepare para lutar","*Você zerou sua reputação, se prepare para lutar")},100);
+    escolha_1.onclick = luta;
+    escolha_2.onclick = luta;
+    escolha_3.onclick = luta;
+    console.log("DEU RUIM");
+}   
 function luta(){
     clearInterval(verificandoReputacao);
     if(lutando){

@@ -176,7 +176,7 @@
 
 #inventario #inv-atributos{
     top: 27%;
-    left: 16.5%;
+    left: 17%;
     width: 25%;
     display: flex;
     justify-content: center;
@@ -185,7 +185,7 @@
 
 #inventario #inv-atributos li{
     display: flex;
-    margin-right:33%;
+    margin-right: 35%;
     margin-bottom: 24%;
     font-weight: bolder;
     -webkit-text-stroke-width: 1px;
@@ -221,7 +221,7 @@
 }
 #inventario #inv-HP{
     top: 53%;
-    right: 48.5%;
+    right: 47.5%;
     color: red;
     font-weight: bolder;
     -webkit-text-stroke-width: 1px;
@@ -244,6 +244,32 @@
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
     width: 50px;
+}
+#inventario #inv-itens{
+    top: 27%;
+    right: 15%;
+    font-size: 22px;
+    width: 27%;
+}
+#inventario #inv-itens ol{
+    margin-bottom: 4%;
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+}
+#inventario #inv-itens ol button{
+    background-color: transparent;
+    border: 0;
+    font-size: 18px;
+}
+#inventario #inv-money{
+    bottom: 15%;
+    right: 15%;
+    display: flex;
+    color: goldenrod;
+    font-weight: bolder;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
 }
 
 #barraHP{

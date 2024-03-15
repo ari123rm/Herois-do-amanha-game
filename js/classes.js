@@ -227,6 +227,9 @@ class Arma{
         }
         return roll;
     }
+    toString(){
+        return `${this.type} | ${this.damage} | ${this.value} | ${this.attribute}`;
+    }
 }
 
 class Npc extends Personagem{
