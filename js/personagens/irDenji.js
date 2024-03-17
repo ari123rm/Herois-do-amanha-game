@@ -368,7 +368,7 @@ function tirarBala(){
     mudarButoes(puxar,puxar,puxar);
     let sangramentoDenji = setInterval(()=>{
         if(denji.vida >= (denji.lvl * (10 + denji.modCon)) || denji.vida <= 0)clearInterval(sangramentoDenji);
-        denji.vida -= dado(6);
+        denji.vida -= dado(12);
         barraInimigoHP.style.width = `${(denji.vida)/ (denji.lvl * (10 + denji.modCon))*100}%`;
         
     },500);
