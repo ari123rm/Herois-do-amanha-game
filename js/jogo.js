@@ -49,7 +49,7 @@ function leave(){
     falas.style.display = "none";
     sprites.style.display = "none";
     mapa.style.display = "flex";
-    jogo.style.backgroundImage = "url(/imagens/mapaHerois2020.png)";
+    jogo.style.backgroundImage = "url(./imagens/mapaHerois2020.png)";
     salvar_mapaAnterior("Mapa");
 }
 //abrindo inventario
@@ -60,22 +60,22 @@ const inventario = document.querySelector("#inventario");
 function salvar_mapaAnterior(mapinha){
     switch(mapinha){
         case "Mapa":
-            mapaAnterior = "/imagens/mapaHerois2020.png";
+            mapaAnterior = "./imagens/mapaHerois2020.png";
             break;
         case "Denji":
-            mapaAnterior = "/imagens/denji/apartamentoDenji.png";
+            mapaAnterior = "./imagens/denji/apartamentoDenji.png";
             break;
 
 
         default:
-            mapaAnterior = "/imagens/mapaHerois2020.png";
+            mapaAnterior = "./imagens/mapaHerois2020.png";
             break;
     }
 }
 function abrindo_inventario (){
     if(inventario.style.display == "flex"){
         inventario.style.display = "none";
-        if(mapaAnterior == "/imagens/mapaHerois2020.png") {
+        if(mapaAnterior == "./imagens/mapaHerois2020.png") {
             mapa.style.display = "flex";
         }
         if(falaAberto){
@@ -95,7 +95,7 @@ function abrindo_inventario (){
             sprites.style.display = "none";
             falaAberto = true;
         }
-        jogo.style.backgroundImage = "url(/imagens/fichaHerois.png)";
+        jogo.style.backgroundImage = "url(./imagens/fichaHerois.png)";
         criarFicha();
         salvarFala = texto_fala.innerText;
         salvarEscolhas = [escolha_1.innerText,escolha_2.innerText,escolha_3.innerText];
