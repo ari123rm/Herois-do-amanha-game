@@ -181,20 +181,13 @@ html{
     background-color: goldenrod;
 }
 @media (max-width:1080px ) {
-    #jogo{
-        transform:rotate(90deg) scale(0.5);
+    #jogo , #criacao-de-personagem{
+        transform: scale(0.3);
+    }
+    #display-jogo{
+        height: 100%;
+        width: 100%;
         
     }
-    #criacao-de-personagem{
-        transform: rotate(90deg) scale(0.5);
-    }
-}
-@media (max-height: 720px) {
-    #jogo{
-        transform: scale(0.5);
-        
-    }
-    #criacao-de-personagem{
-        transform:  scale(0.5);
-    }
+    
 }
