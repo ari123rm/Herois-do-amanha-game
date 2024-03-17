@@ -368,7 +368,7 @@ function tirarBala(){
     mudarButoes(puxar,puxar,puxar);
     let sangramentoDenji = setInterval(()=>{
         if(denji.vida >= (denji.lvl * (10 + denji.modCon)) || denji.vida <= 0)clearInterval(sangramentoDenji);
-        denji.vida -= dado(12);
+        denji.vida -= dado(6);
         barraInimigoHP.style.width = `${(denji.vida)/ (denji.lvl * (10 + denji.modCon))*100}%`;
         
     },500);
@@ -385,6 +385,7 @@ function tirarBala(){
             mudarButoes(sair,sair,sair);
         }
         if(denji.vida <= 0){
+            reputacao(-100);
             mudarSprite(-1);
             imagem_sprite_Denji.className = "";
             mudarFala(`A-avisa. . . . ao . . . Pochita . . . . que eu o amo . . . . .*${denji.nome} morreu`);
