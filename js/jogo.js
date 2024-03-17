@@ -106,7 +106,7 @@ function abrindo_inventario (){
 abrir_inventario.onclick = abrindo_inventario;
 
 //Denji
-import { falando_Denji } from "/js/personagens/irDenji.js";
+import { falando_Denji } from "./js/personagens/irDenji.js";
 const irDenji = document.querySelector("#irPara_Denji");
 function indoParaDenji(){
     mapa.style.display = "none";
