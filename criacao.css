@@ -15,7 +15,7 @@ html{
     text-align: center;
     width: 1080px;
     height: 720px;
-    background-image: url("imagens/criacaoPersonagem.png");
+    background-image: url("./imagens/criacaoPersonagem.png");
     font-family: Impact;
     color:white;
     -webkit-text-stroke-width: 1px;

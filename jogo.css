@@ -34,7 +34,7 @@
     width: 1080px;
     height: 720px;
     position: absolute;
-    background-image: url("/imagens/mapaHerois2020.png");
+    background-image: url("./imagens/mapaHerois2020.png");
 
     border: 2px solid black;
 }
