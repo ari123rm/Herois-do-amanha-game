@@ -8,16 +8,24 @@
     background: -ms-linear-gradient(left, #000000, #794600);
     background: -o-linear-gradient(left, #000000, #794600);
     background: linear-gradient(to right, #000000, #794600);
-
+    height: 100%;
+    width: 100%;
 }
 
 #display-jogo{
-    justify-content: center;
-    align-content: center;
-    display: flex;
+    position: absolute;
     width: 100%;
-    margin-top: 5%;
-    position: relative;
+    height: 100%;
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    
+    
+    
+
+    
 }
 
 #jogo{

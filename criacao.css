@@ -2,6 +2,11 @@
     margin: 0;
     padding: 0;
 }
+html{
+    width: 100%;
+    height: 100%;
+}
+
 #some{
     display: none;
 }
@@ -174,4 +179,22 @@
 }
 #criacao-de-personagem #criar-prota:hover{
     background-color: goldenrod;
+}
+@media (max-width:1080px ) {
+    #jogo{
+        transform:rotate(90deg) scale(0.5);
+        
+    }
+    #criacao-de-personagem{
+        transform: rotate(90deg) scale(0.5);
+    }
+}
+@media (max-height: 720px) {
+    #jogo{
+        transform: scale(0.5);
+        
+    }
+    #criacao-de-personagem{
+        transform:  scale(0.5);
+    }
 }
