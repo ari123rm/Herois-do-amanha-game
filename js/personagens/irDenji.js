@@ -373,7 +373,7 @@ function tirarBala(){
         
     },500);
     function puxar(){
-        if(jogador().roll("Sab") >= 20){
+        if(jogador().roll("Sab") >= 15){
             denji.vida += dado(20) + jogador().modSab;
             barraInimigoHP.style.width = `${(denji.vida)/ (denji.lvl * (10 + denji.modCon))*100}%`;
         }
