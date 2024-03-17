@@ -20,6 +20,9 @@ function diminuir_Atributo(index){
 
         valorAtributo[index].innerText = parseInt(valorAtributo[index].innerText) - 1 ;
         modificadores[index].innerText = Math.floor((parseInt(valorAtributo[index].innerText) - 10)/2);
+        if(Math.floor((parseInt(valorAtributo[index].innerText) - 10)/2) > 0){
+            modificadores[index].innerText = "+" + modificadores[index].innerText;
+        }
         if(parseInt(valorAtributo[index].innerText) >= 13){
             points.innerText = parseInt(points.innerText) + 2;
         }else{

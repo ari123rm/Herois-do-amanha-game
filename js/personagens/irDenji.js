@@ -1,6 +1,7 @@
 const falas = document.querySelector("#falas");
 const sprites = document.querySelector("#sprites");
 const imagem_sprite_Denji = document.querySelector("#sprites img");
+const irDenji = document.querySelector("#irPara_Denji");
 
 const texto_fala = document.querySelector("#textoFala");
 const escolhas = document.querySelector("#escolhas");
@@ -15,7 +16,8 @@ const barraREP = document.querySelector("#barraREP");
 const barraREPvalue = document.querySelector("#barraREP div");
 import {denji} from "../objects.js";
 import {jogador} from "../criacao.js";
-import { mudarButoes,mudarEscolhas,mudarFala } from "../jogo.js";
+import { mudarButoes,mudarEscolhas,mudarFala,leave } from "../jogo.js";
+
 //funções auxiliares
 function mudarSprite(valor){
     if(valor >= 0){
@@ -91,6 +93,7 @@ function fugir(){
             mudarButoes(fugir,apostandoCorrida,luta)
         }
     }else{
+        clearInterval(verificandoReputacao)
         reputacao(-100);
         mudarSprite(-1);
         mudarFala("Você escapou!");
@@ -296,31 +299,104 @@ function virouMulher(){
     }
 }
 function casamento(){
-    if(jogador().roll("Car") >= denji.DT("Car") && (jogador().genero == "F" || generoBait == "F")){
+    if(jogador().roll("Car") >= denji.DT("Car") || (jogador().genero == "F" || generoBait == "F")){
         mudarSprite(6)
         mudarFala(`Eu, ${denji.nome}, aceito me casar com você`);
         mudarEscolhas("Agora que somos casados, precisamos acabar com o ART","Te enganei HAHAHAHAHA", `*Abraçar o ${denji.nome}(Sab)`);
         mudarButoes(herois,deuFora,ajuda);
+    }else{
+        reputacao(-20);
+        mudarSprite(2);
+        mudarFala("TA QUERENDO ME ENGANAR *barulhos de motosserra");
+        mudarEscolhas("lutar","lutar","lutar");
+        mudarButoes(luta,luta,luta)
     }
 }
 //lore principal
 function herois(){
-    
+    mudarSprite(6)
+    reputacao(15)
+    jogador().genero == 'F' || generoBait == 'F' ? mudarFala("Pera... você é da Agência? Um rostinho bonito esconde a sua verdadeira força "): mudarFala("Então quer dizer que enviaram mais para aqui");
+    mudarEscolhas("Pera... O que é isso? (Sab)","Vou ajudar no que precisar(Car)","Pode deixar comigo que vou acabar com ART(Car)");
+    mudarButoes(ajuda,precisarAjuda,precisarAjuda);
+}
+function precisarAjuda(){
+    if(jogador().roll("Car") >= denji.DT("Car")){
+        reputacao(10)
+        mudarSprite(1)
+        mudarFala("Bom então vou te contar... Na última batalha acabei me ferindo muito, preciso da sua ajuda para estancar meu sagramento")
+        mudarEscolhas("*ajudar(Sab)","Deixa eu ver isso ai(Sab)","Bom posso tentar algo...(Sab)");
+        mudarButoes(ajuda,ajuda,ajuda);
+    }else{
+        mudarSprite(-1)
+        mudarFala(`*${denji.nome} cai no chão, sua camisa começa a surgir uma mancha de sangue`);
+        mudarEscolhas("*tirar a camisa dele", "*chorar","*ajudar ele");
+        mudarButoes(ajuda,meuDeus,ajuda);
+    }
 }
 function ajuda(){
-    
+    reputacao(10);
+    mudarSprite(-1)
+    mudarFala(`*${denji.nome} mostra um buraco de bala em seu peito, se não for tirado rapidamente pode leva-lo a morte`);
+    if(jogador().roll("Sab") >= 10){
+        mudarEscolhas("Preciso que fique parado, vai doer um pouco *tirar bala","Confia em mim... *tirar bala","Eu acho que consigo...*tirar bala")
+        mudarButoes(tirarBala,tirarBala,tirarBala)
+    }else{
+        mudarEscolhas("Meu Deus, o que é isso?","As vezes, amar é deixar ir","Posso até tentar algo mas acredito que vou ferrar você");
+        mudarButoes(meuDeus,meuDeus,tirarBala);
+    }
 }
 
+function meuDeus(){
+    reputacao(-10)
+    mudarSprite(1);
+    mudarSprite("Nunca viu uma bala não? So me ajuda a tirar aqui!")
+    mudarEscolhas("Ta bom...*tirar bala","Só não se mexe *tirar bala","Não sou especialista nisso mas acredito que vai dar certo *tirar bala");
+    mudarButoes(tirarBala,tirarBala,tirarBala)
+}
 
-
-
-
-
+//mecanica de salvar o Denji
+function tirarBala(){   
+    mudarSprite(8);
+    barraInimigo.style.display = "grid";
+    denji.vida = denji.vida/2;
+    barraInimigoHP.style.width = `${(denji.vida)/ (denji.lvl * (10 + denji.modCon))*100}%`;
+    barraInimigoNome.innerText = denji.nome;
+    imagem_sprite_Denji.className = "coracao";
+    mudarFala(`*Aperte o botão para tirar a bala do peito do ${denji.nome}`);
+    mudarEscolhas("PUXAR","PUXAR","PUXAR");
+    mudarButoes(puxar,puxar,puxar);
+    let sangramentoDenji = setInterval(()=>{
+        if(denji.vida >= (denji.lvl * (10 + denji.modCon)) || denji.vida <= 0)clearInterval(sangramentoDenji);
+        denji.vida -= dado(12);
+        barraInimigoHP.style.width = `${(denji.vida)/ (denji.lvl * (10 + denji.modCon))*100}%`;
+        
+    },500);
+    function puxar(){
+        if(jogador().roll("Sab") >= 20){
+            denji.vida += dado(20) + jogador().modSab;
+            barraInimigoHP.style.width = `${(denji.vida)/ (denji.lvl * (10 + denji.modCon))*100}%`;
+        }
+        if(denji.vida >= (denji.lvl * (10 + denji.modCon))){
+            imagem_sprite_Denji.className = "";
+            mudarSprite(2);
+            mudarFala(`Agora me sinto bem melhor :D, valeu ai! Mas preciso resolver umas coisas ainda *${denji.nome} se retira `);
+            mudarEscolhas("Sair","Sair","Sair");
+            mudarButoes(sair,sair,sair);
+        }
+        if(denji.vida <= 0){
+            mudarSprite(-1);
+            imagem_sprite_Denji.className = "";
+            mudarFala(`A-avisa. . . . ao . . . Pochita . . . . que eu o amo . . . . .*${denji.nome} morreu`);
+            mudarEscolhas("Sair","Sair","Sair");
+            mudarButoes(sair,sair,sair);
+        }
+    }
+}
 //mecanica de corrida
 let run = false;
 let jogadorCorre = 0,denjiCorre = 0;
 let denjiCorrendo ;
-let testandoCorrida;
 function correr(quem){
     if(quem == jogador().nome){
         jogadorCorre += jogador().modDex + dado(20);
@@ -481,12 +557,8 @@ function corrida(){
             mudarEscolhas("sair","sair","sair");
             escolha_1.onclick = sair;
             escolha_2.onclick = sair;
-            escolha_3.onclick = sair;          
-        }
-    },timer);
-    testandoCorrida = setInterval(()=>{
-        if(denjiCorre >= 100){
-            clearInterval(denjiCorrendo);
+            escolha_3.onclick = sair;   
+            clearInterval(denjiCorrendo);       
         }
     },timer);
     
@@ -542,7 +614,7 @@ function luta(){
         barraInimigoNome.innerText = denji.nome;
         mudarSprite(7);
 
-        mudarEscolhas(lutando);
+        mudarEscolhas("","","",lutando);
         escolha_1.onclick = bater;
         escolha_2.onclick = fugir;
         escolha_3.onclick = esquivar;
@@ -635,4 +707,12 @@ function bater(){
 }
 function esquivar(){
      
+}
+
+
+function sair(){
+    clearInterval(verificandoReputacao)
+    jogador().progress = {nome:`${denji.nome}`, rep: denji.reputation};
+    irDenji.style.display = "none";
+    leave();
 }

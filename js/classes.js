@@ -25,13 +25,14 @@ class Personagem{
         this.#sabedoria = atributos[4];
         this.#carisma = atributos[5];
         this.#gender = agenero;
-        this.#CA = 10 + this.modDex;
-        this.#hp = this.lvl*(10 + this.modCon);
+        this.#money = 100;
         this.#inventario = {
             armas : aarma,
             armaduras: aarmadura
         };
-        this.#money = 100;
+        this.#hp = this.lvl*(10 + this.modCon);
+        this.#CA = this.invArmaduras[0].protecao + this.modDex;
+        
     }
 
    //SETS
@@ -95,7 +96,24 @@ class Personagem{
         return this.#gender;
     }
     get armor(){
-        return this.#CA;
+        switch(this.invArmaduras[0].tipo){
+            case 'N':
+                return this.invArmaduras[0].protecao + this.modDex;
+                break;
+            case 'L':
+                return this.invArmaduras[0].protecao + this.modDex;
+                break;
+            case 'M':
+                if(this.modDex >=2 ) return this.invArmaduras[0].protecao + 2;
+                return this.invArmaduras[0].protecao + this.modDex;
+                break;
+            case 'P':
+                return this.invArmaduras[0].protecao;
+                break;
+            default:
+                return this.invArmaduras[0].protecao + this.modDex;
+                break;
+        }      
     }
     get vida(){
         return this.#hp;
@@ -278,8 +296,8 @@ class Armadura{
 }
 class Npc extends Personagem{
     #reputacao
-    constructor(anick,alevel,atributos,agenero,ainv){
-        super(anick,alevel,atributos,agenero,ainv);
+    constructor(anick,alevel,atributos,agenero,aarma,aarmadura){
+        super(anick,alevel,atributos,agenero,aarma,aarmadura);
         this.#reputacao =  50;
     }
     get reputation(){

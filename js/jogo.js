@@ -11,6 +11,7 @@ const escolha_3 = document.querySelector("#escolha-3");
 
 
 import {jogador} from "./criacao.js";
+export {mudarButoes,mudarEscolhas,mudarFala, leave};
 //funções do joguinho kkk
 let lutaOn = false
 function mudarButoes(f1,f2,f3){
@@ -44,9 +45,13 @@ function mudarFala(fala){
     });
     setTimeout(() =>{escolhas.style.display = "flex";}, 50 * falaSplit.length);
 }
-
-export {mudarButoes,mudarEscolhas,mudarFala};
-
+function leave(){
+    falas.style.display = "none";
+    sprites.style.display = "none";
+    mapa.style.display = "flex";
+    jogo.style.backgroundImage = "url(/imagens/mapaHerois2020.png)";
+    salvar_mapaAnterior("Mapa");
+}
 //abrindo inventario
 import { criarFicha } from "./ficha.js";
 let mapaAnterior,falaAberto,salvarFala,salvarEscolhas;
@@ -100,7 +105,7 @@ function abrindo_inventario (){
 }  
 abrir_inventario.onclick = abrindo_inventario;
 
-//Indo para Denji
+//Denji
 import { falando_Denji } from "/js/personagens/irDenji.js";
 const irDenji = document.querySelector("#irPara_Denji");
 function indoParaDenji(){
@@ -110,3 +115,6 @@ function indoParaDenji(){
     falando_Denji();
 }
 irDenji.onclick = indoParaDenji;
+
+
+

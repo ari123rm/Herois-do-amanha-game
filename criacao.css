@@ -2,45 +2,91 @@
     margin: 0;
     padding: 0;
 }
+#some{
+    display: none;
+}
 #criacao-de-personagem{
-    display: none;/* grid*/
+    display: flex;
     text-align: center;
-    background-color: aquamarine;
-    padding-bottom: 10px;
-}
-#criacao-de-personagem  h2{
-    text-align: left;
-    margin-left: 20px;
-}
-#criacao-de-personagem #personalizacao{
-    display:flex;
-    justify-content: space-between;
-    padding-left: 20px;
-    padding-right: 20px;
+    width: 1080px;
+    height: 720px;
+    background-image: url("imagens/criacaoPersonagem.png");
+    font-family: Impact;
+    color:white;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    position: absolute;
 }
 
-#criacao-de-personagem #personalizacao #nickname{
+#criacao-de-personagem  h2{
+    top: 12%;
+    position: absolute;
+    height: min-content;
+    justify-self: center;
+    width: 100%;
+    text-align: center;
+    font-size: 32px;
+    text-decoration: underline white;
+}
+
+#criacao-de-personagem  h3{
+    text-align: left;
+    top:20%;
+    left: 20%;
+    position: absolute;
+    height: min-content;
+    font-size: 26px;
+}
+
+
+#criacao-de-personagem  #nickname{
     width: 350px;
-    font-size: 16px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    font-size: 26px;
+    font-family: Impact;
     margin-top: 0;
     text-align: center;
+    top:20%;
+    left: 27%;
+    position: absolute;
+    color: grey;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
 }
-#criacao-de-personagem #personalizacao #atributoPricipal{
+#criacao-de-personagem #atributoPrincipal{
     width: max-content;
-
-
+    position: absolute;
+    top: 27%;
+    left: 20%;
+    font-family: sans-serif;
+    color:black;
+    font-size: 16px;
 }
-#criacao-de-personagem #personalizacao #atributoSecundario{
+#criacao-de-personagem #atributoSecundario{
     width: max-content;
-
-
+    position: absolute;
+    top: 27%;
+    right: 20%;
+    font-family: sans-serif;
+    color:black;
+    font-size: 16px;
+    
+}
+#criacao-de-personagem #atributoGenero{
+   
+    width: max-content;
+    position: absolute;
+    top: 20%;
+    right: 20%;
+    font-family: sans-serif;
+    color:black;
+    font-size: 16px;
 }
 #criacao-de-personagem label{
-    text-align: center;
-    justify-content: center;
     display: flex;
+    position: absolute;
+    top: 32%;
+    width: 100%;
+
 }
 #criacao-de-personagem label h2{
     text-align: center;
@@ -50,21 +96,30 @@
 #distribuicaoAtributos{
     display: flex;
     justify-content: center;
-
+    top: 38%;
+    position: absolute;
+    width: 73%;
+    flex-wrap: wrap;
+    left: 14%;
+    
 }
 #distribuicaoAtributos .atributos{
-    margin: 20px;
+    margin: 5px 50px;
     justify-content: center;
     border-radius: 20px;
-    border: 2px solid black;
-    background-color: cadetblue;
-    width: 100px;
-    height: 100px;
+    border: 2px solid goldenrod;
+    background-color:rgba(100, 100,100, 30%);
+    width: 125px;
+    height: 125px;
     padding: 10px;
+    
+    
 }
 #distribuicaoAtributos .atributos h3{
     margin-bottom: 10px;
     text-align: center;
+    position: static;
+    font-size: 22px;
 }
 #distribuicaoAtributos .atributos  .butaoAtributos{
     display: flex;
@@ -80,7 +135,7 @@
 
 }
 #distribuicaoAtributos .atributos  .butaoAtributos p{
-    font-size: 20px;
+    font-size: 26px;
     font-weight: bolder;
     font-family: impact;
     text-align: center;
@@ -88,10 +143,35 @@
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 5px;
-    width: 45px;
+    width: 60px;
+    
 }
 #distribuicaoAtributos .atributos  .butaoAtributos button{
     text-align: center;
     font-size: 16px;
     height: min-content ;
+    width: 15%;
+    margin-top: 5px;
+}
+#criacao-de-personagem #local-butao-criar-prota{
+    width: 100%;
+    height: 8%;
+    position: absolute;
+    bottom: 5.7%;;
+    display: flex;
+    justify-content: center;
+}
+#criacao-de-personagem #criar-prota{
+    position: absolute;
+    width: 30%;
+    font-size: xx-large;
+    justify-self: center;
+    background-color: gold;
+    color: white;
+    font-weight: bolder;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+#criacao-de-personagem #criar-prota:hover{
+    background-color: goldenrod;
 }

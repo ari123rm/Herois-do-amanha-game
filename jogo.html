@@ -16,123 +16,128 @@
     <header>
 
     </header>
-    <main >
-        <div id = "criacao-de-personagem">
-            <h1>JOGUINHO DO HERÓIS DO AMANHÃ</h1>
-                <h2>Digite o nome do seu personagem:</h2>
-                <div id = "personalizacao">
-                <input type="text" name="Nickname" id="nickname">
-                <select name="AtributoPrincipal" id="atributoPrincipal">
-                    <option value="selecionePricipal">Selecione seu atributo principal (+2)</option>
-                    <option value="0">Força (+2)</option>
-                    <option value="1">Destreza (+2)</option>
-                    <option value="2">Constituição (+2)</option>
-                    <option value="3">Inteligência (+2)</option>
-                    <option value="4">Sabedoria (+2)</option>
-                    <option value="5">Carisma (+2)</option>
-                </select>
-                <select name="AtributoSecundario" id="atributoSecundario">
-                    <option value="selecioneSecundario">Selecione seu atributo secundario (+1)</option>
-                    <option value="0">Força (+1)</option>
-                    <option value="1">Destreza (+1)</option>
-                    <option value="2">Constituição (+1)</option>
-                    <option value="3">Inteligência (+1)</option>
-                    <option value="4">Sabedoria (+1)</option>
-                    <option value="5">Carisma (+1)</option>
-                </select>
-                <select name="gênero" id="atributoGenero">
-                    <option value="selecioneGenero">Escolha seu gênero</option>
-                    <option value="M">Masculino</option>
-                    <option value="F">Feminino</option>
-                    <option value="N">Não informar</option>
-                </select>
-            </div>
-            <label><h2>Pontos de atributos: <p id="pontos-de-atributos">27</p></h2></label>
-            <ul id = "distribuicaoAtributos" type = "none">
-                <li class="atributos">
-                    
-                    <h3>Força:</h3>
-                    <div class = "butaoAtributos">
-
-                        <button class = "diminuirAtributo" id = "diminuirFor">-</button>
-                    <div class = "displayAtributos">
-                            <p class="valorAtributo" id = "valorForca">8 </p>
-                            <p>&lpar; <bdi class = "modAtributo">-1</bdi> &rpar;</p> 
-                        </div>
-                        <button class = "aumentarAtributo" id = "aumentarFor">+</button>
-                    </div>
-                </li>
-                <li class="atributos">
-                    
-                    <h3>Destreza:</h3>
-                    <div class = "butaoAtributos">
-
-                        <button class = "diminuirAtributo" id = "diminuirDex">-</button>
-                        <div class = "displayAtributos">
-                            <p class="valorAtributo">8</p>
-                            <p>&lpar; <bdi class = "modAtributo">-1</bdi> &rpar;</p> 
-                        </div>
-                        <button class = "aumentarAtributo" id = "aumentarDex">+</button>
-                    </div>
-                </li>
-                <li class="atributos">
-                    
-                    <h3>Constituição:</h3>
-                    <div class = "butaoAtributos">
-
-                        <button class = "diminuirAtributo" id = "diminuirCon">-</button>
-
-                        <div class = "displayAtributos">
-                            <p class="valorAtributo">8</p>
-                            <p>&lpar; <bdi class = "modAtributo">-1</bdi> &rpar;</p> 
-                        </div>
-                        <button class = "aumentarAtributo" id = "aumentarCon">+</button>
-                    </div>
-                </li>
-                <li class="atributos">
-                    
-                    <h3>Inteligência:</h3>
-                    <div class = "butaoAtributos">
-
-                        <button class = "diminuirAtributo"id = "diminuirInt">-</button>
-                        <div class = "displayAtributos">
-                            <p class="valorAtributo">8</p>
-                            <p>&lpar; <bdi class = "modAtributo">-1</bdi> &rpar;</p> 
-                        </div>
-                        <button class = "aumentarAtributo" id = "aumentarInt">+</button>
-                    </div>
-                </li>
-                <li class="atributos">
-                    
-                    <h3>Sabedoria:</h3>
-                    <div class = "butaoAtributos">
-
-                        <button class = "diminuirAtributo" id = "diminuirSab">-</button>
-                        <div class = "displayAtributos">
-                            <p class="valorAtributo">8</p>
-                            <p>&lpar; <bdi class = "modAtributo">-1</bdi> &rpar;</p> 
-                        </div>
-                        <button class = "aumentarAtributo" id = "aumentarSab">+</button>
-                    </div>
-                </li>
-                <li class="atributos">
-                    
-                    <h3>Carisma:</h3>
-                    <div class = "butaoAtributos">
-
-                        <button class = "diminuirAtributo" id = "diminuirCar">-</button>
-                        <div class = "displayAtributos">
-                            <p class="valorAtributo">8</p>
-                            <p>&lpar; <bdi class = "modAtributo">-1</bdi> &rpar;</p> 
-                        </div>
-                        <button class = "aumentarAtributo" id = "aumentarCar">+</button>
-                    </div>
-                </li>
-            </ul>
-            <button id = "criar-prota">Começar!</button>
-        </div>
+    <main>
         
         <div id = "display-jogo">
+            <div id = "criacao-de-personagem">
+                <h2>CRIAÇÃO DE PERSONAGEM</h2>
+                <h3>NOME:</h3>
+                
+                    
+                    <input type="text" name="Nickname" id="nickname">
+                    <select name="AtributoPrincipal" id="atributoPrincipal">
+                        <option value="selecionePricipal">Selecione seu atributo principal (+2)</option>
+                        <option value="0">Força (+2)</option>
+                        <option value="1">Destreza (+2)</option>
+                        <option value="2">Constituição (+2)</option>
+                        <option value="3">Inteligência (+2)</option>
+                        <option value="4">Sabedoria (+2)</option>
+                        <option value="5">Carisma (+2)</option>
+                    </select>
+                    <select name="AtributoSecundario" id="atributoSecundario">
+                        <option value="selecioneSecundario">Selecione seu atributo secundario (+1)</option>
+                        <option value="0">Força (+1)</option>
+                        <option value="1">Destreza (+1)</option>
+                        <option value="2">Constituição (+1)</option>
+                        <option value="3">Inteligência (+1)</option>
+                        <option value="4">Sabedoria (+1)</option>
+                        <option value="5">Carisma (+1)</option>
+                    </select>
+                    <select name="gênero" id="atributoGenero">
+                        <option value="selecioneGenero">Escolha seu gênero</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                        <option value="N">Não informar</option>
+                    </select>
+                    
+                    
+                <label><h2>Pontos de atributos: <p id="pontos-de-atributos">27</p></h2></label>
+                
+                <ul id = "distribuicaoAtributos" type = "none">
+                    <li class="atributos">
+                        
+                        <h3>Força:</h3>
+                        <div class = "butaoAtributos">
+    
+                            <button class = "diminuirAtributo" id = "diminuirFor">-</button>
+                        <div class = "displayAtributos">
+                                <p class="valorAtributo" id = "valorForca">8 </p>
+                                <p>&lpar; <bdi class = "modAtributo">-1</bdi> &rpar;</p> 
+                            </div>
+                            <button class = "aumentarAtributo" id = "aumentarFor">+</button>
+                        </div>
+                    </li>
+                    <li class="atributos">
+                        
+                        <h3>Destreza:</h3>
+                        <div class = "butaoAtributos">
+    
+                            <button class = "diminuirAtributo" id = "diminuirDex">-</button>
+                            <div class = "displayAtributos">
+                                <p class="valorAtributo">8</p>
+                                <p>&lpar; <bdi class = "modAtributo">-1</bdi> &rpar;</p> 
+                            </div>
+                            <button class = "aumentarAtributo" id = "aumentarDex">+</button>
+                        </div>
+                    </li>
+                    <li class="atributos">
+                        
+                        <h3>Constituição:</h3>
+                        <div class = "butaoAtributos">
+    
+                            <button class = "diminuirAtributo" id = "diminuirCon">-</button>
+    
+                            <div class = "displayAtributos">
+                                <p class="valorAtributo">8</p>
+                                <p>&lpar; <bdi class = "modAtributo">-1</bdi> &rpar;</p> 
+                            </div>
+                            <button class = "aumentarAtributo" id = "aumentarCon">+</button>
+                        </div>
+                    </li>
+                    <li class="atributos">
+                        
+                        <h3>Inteligência:</h3>
+                        <div class = "butaoAtributos">
+    
+                            <button class = "diminuirAtributo"id = "diminuirInt">-</button>
+                            <div class = "displayAtributos">
+                                <p class="valorAtributo">8</p>
+                                <p>&lpar; <bdi class = "modAtributo">-1</bdi> &rpar;</p> 
+                            </div>
+                            <button class = "aumentarAtributo" id = "aumentarInt">+</button>
+                        </div>
+                    </li>
+                    <li class="atributos">
+                        
+                        <h3>Sabedoria:</h3>
+                        <div class = "butaoAtributos">
+    
+                            <button class = "diminuirAtributo" id = "diminuirSab">-</button>
+                            <div class = "displayAtributos">
+                                <p class="valorAtributo">8</p>
+                                <p>&lpar; <bdi class = "modAtributo">-1</bdi> &rpar;</p> 
+                            </div>
+                            <button class = "aumentarAtributo" id = "aumentarSab">+</button>
+                        </div>
+                    </li>
+                    <li class="atributos">
+                        
+                        <h3>Carisma:</h3>
+                        <div class = "butaoAtributos">
+    
+                            <button class = "diminuirAtributo" id = "diminuirCar">-</button>
+                            <div class = "displayAtributos">
+                                <p class="valorAtributo">8</p>
+                                <p>&lpar; <bdi class = "modAtributo">-1</bdi> &rpar;</p> 
+                            </div>
+                            <button class = "aumentarAtributo" id = "aumentarCar">+</button>
+                        </div>
+                    </li>
+                </ul>
+                <div id = "local-butao-criar-prota">
+                    <button id = "criar-prota">Começar!</button>
+                </div>
+                </div>
             
             <div id = "jogo">
                 
@@ -174,12 +179,12 @@
                     <ol id = "inv-itens" class = "inv-texto" type ="none">
                         <li class = "inv-arma">Nome | Dano | Valor | Atr</li>
                         <li><button class = "inv-itens-subir">&#128070;</button><p class = "inv-arma"></p> <button class = "inv-itens-descer">&#128071;</button></li>
-                        <li><button class = "inv-itens-subir">&#128070;</button><p class = "inv-arma"></p> <button class = "inv-itens-descer">&#128071;</button></li>
-                        <li><button class = "inv-itens-subir">&#128070;</button><p class = "inv-arma"></p> <button class = "inv-itens-descer">&#128071;</button></li>
-                        <li><button class = "inv-itens-subir">&#128070;</button><p class = "inv-arma"></p> <button class = "inv-itens-descer">&#128071;</button></li>
-                        <li><button class = "inv-itens-subir">&#128070;</button><p class = "inv-arma"></p> <button class = "inv-itens-descer">&#128071;</button></li>
-                        <li><button class = "inv-itens-subir">&#128070;</button><p class = "inv-arma"></p> <button class = "inv-itens-descer">&#128071;</button></li>
-                        <li><button class = "inv-itens-subir">&#128070;</button><p class = "inv-arma"></p> <button class = "inv-itens-descer">&#128071;</button></li>
+                        <li><button class = "inv-itens-subir">&#128070;</button> <p class = "inv-arma"></p> <button class = "inv-itens-descer">&#128071;</button></li>
+                        <li><button class = "inv-itens-subir">&#128070;</button> <p class = "inv-arma"></p> <button class = "inv-itens-descer">&#128071;</button></li>
+                        <li><button class = "inv-itens-subir">&#128070;</button> <p class = "inv-arma"></p> <button class = "inv-itens-descer">&#128071;</button></li>
+                        <li><button class = "inv-itens-subir">&#128070;</button> <p class = "inv-arma"></p> <button class = "inv-itens-descer">&#128071;</button></li>
+                        <li><button class = "inv-itens-subir">&#128070;</button> <p class = "inv-arma"></p> <button class = "inv-itens-descer">&#128071;</button></li>
+                        <li><button class = "inv-itens-subir">&#128070;</button> <p class = "inv-arma"></p> <button class = "inv-itens-descer">&#128071;</button></li>
                     </ol>
                     
                 </div>
