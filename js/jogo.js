@@ -104,7 +104,6 @@ function abrindo_inventario (){
     }
 }  
 abrir_inventario.onclick = abrindo_inventario;
-
 //Denji
 import { falando_Denji } from "./personagens/irDenji.js";
 const irDenji = document.querySelector("#irPara_Denji");
