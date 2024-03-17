@@ -95,6 +95,7 @@ function abrindo_inventario (){
             sprites.style.display = "none";
             falaAberto = true;
         }
+        
         jogo.style.backgroundImage = "url('./imagens/FichaHerois.png')";
         criarFicha();
         salvarFala = texto_fala.innerText;
