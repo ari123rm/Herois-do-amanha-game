@@ -11,7 +11,7 @@ html{
     display: none;
 }
 #criacao-de-personagem{
-    display: flex; /*flex*/
+    display: none; /*flex;*/
     text-align: center;
     width: 1080px;
     height: 720px;

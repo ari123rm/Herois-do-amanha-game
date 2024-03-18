@@ -29,9 +29,10 @@ const adamantium = new Armadura("Adamantium",20,2500,'P');
 
 
 const armors = [casaco,couro,algodao,ferro,colete,grafeno,dima,metalGear,adamantium];
-export {roupa,casaco,couro,algodao,ferro,colete,grafeno,dima,metalGear,adamantium,armors}
+export {roupa,casaco,couro,algodao,ferro,colete,grafeno,dima,metalGear,adamantium,armors};
 
 // NPCS
+
 const denji = new Npc("Denji Miyazaki",12,[22,14,16,8,8,10],"M",[motosserra],[roupa]);
 const simon = new Npc("Simon Newgate", 12,[14,20,16,8,14,9],"M",[arco],[roupa]);
 const john_holly = new Npc("John Holly",10,[16,14,10,11,12,14],"M",[fuzil],[roupa]);
@@ -39,3 +40,8 @@ const john_holly = new Npc("John Holly",10,[16,14,10,11,12,14],"M",[fuzil],[roup
 
 export {denji,simon,john_holly};
 
+//Personagem TESTE
+const teste = new Save("Teste",7,[10,10,10,10,10,10],"M",[mao,arco,motosserra,fuzil],[roupa]);
+teste.dinheiro = 100000;
+
+export {teste};

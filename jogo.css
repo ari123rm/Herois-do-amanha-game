@@ -29,7 +29,7 @@
 }
 
 #jogo{
-    display: none; /* flex*/
+    display: flex; /* flex;*/
 
     width: 1080px;
     height: 720px;
@@ -598,4 +598,17 @@
 #loja #loja-armas img,#loja #loja-armadura img{
     width: 100%;
     height: 50%;
+}
+#loja #loja-dinheiro{
+    position: absolute;
+    font-size: 26px;
+    font-family: Impact;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    top: 2%;
+    right: 12%;
+    display: flex;
+    color: gold;
+    align-items: center;
+
 }
