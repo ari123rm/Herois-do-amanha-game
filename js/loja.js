@@ -26,10 +26,10 @@ lojaSair.onclick = leave;
 //função principal
 export function criarLoja(){
     armasImagens.forEach((element,index) => {
-        element.src = `/imagens/loja/itens/${guns[index].type}.png`;
+        element.src = `./imagens/loja/itens/${guns[index].type}.png`;
     });
     armadurasImagens.forEach((element,index) => {
-        element.src = `/imagens/loja/itens/${armors[index].name}.png`;
+        element.src = `./imagens/loja/itens/${armors[index].name}.png`;
     });
     armasNome.forEach((element,index) =>{
         element.innerText = guns[index].type;
