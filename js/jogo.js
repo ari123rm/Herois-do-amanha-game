@@ -4,6 +4,7 @@ const falas = document.querySelector("#falas");
 const sprites = document.querySelector("#sprites");
 const escolhas = document.querySelector("#escolhas");
 const imagem_sprite_Denji = document.querySelector("#sprites img");
+const loja = document.querySelector("#loja");
 const texto_fala = document.querySelector("#textoFala");
 const escolha_1 = document.querySelector("#escolha-1");
 const escolha_2 = document.querySelector("#escolha-2");
@@ -48,6 +49,7 @@ function mudarFala(fala){
 function leave(){
     falas.style.display = "none";
     sprites.style.display = "none";
+    loja.style.display ="none";
     mapa.style.display = "flex";
     jogo.style.backgroundImage = "url(./imagens/mapaHerois2020.png)";
     salvar_mapaAnterior("Mapa");
@@ -59,6 +61,9 @@ const abrir_inventario = document.querySelector("#abrir-inventario");
 const inventario = document.querySelector("#inventario");
 function salvar_mapaAnterior(mapinha){
     switch(mapinha){
+        case "Loja":
+            mapaAnterior = "./imagens/loja/lojaCatalogo.png";
+            break;
         case "Mapa":
             mapaAnterior = "./imagens/mapaHerois2020.png";
             break;
@@ -78,6 +83,9 @@ function abrindo_inventario (){
         if(mapaAnterior == "./imagens/mapaHerois2020.png") {
             mapa.style.display = "flex";
         }
+        if(loja.style.display == "none"){
+            loja.style.display = "flex";
+        }
         if(falaAberto){
             falas.style.display = "flex";
             sprites.style.display = "flex";
@@ -95,7 +103,9 @@ function abrindo_inventario (){
             sprites.style.display = "none";
             falaAberto = true;
         }
-
+        if(loja.style.display == "flex"){
+            loja.style.display = "none";
+        }
         jogo.style.backgroundImage = "url(./imagens/fichaHerois.png)";
         criarFicha();
         salvarFala = texto_fala.innerText;
@@ -105,6 +115,17 @@ function abrindo_inventario (){
     }
 }  
 abrir_inventario.onclick = abrindo_inventario;
+//Loja
+import { criarLoja } from "./loja.js";
+const irLoja = document.querySelector("#irPara_Loja");
+function indoParaLoja(){
+    mapa.style.display = "none";
+    jogo.style.backgroundImage = "url(./imagens/loja/lojaCatalogo.png)";
+    loja.style.display ="flex";
+    salvar_mapaAnterior("Loja");
+    criarLoja();
+}
+irLoja.onclick = indoParaLoja;
 //Denji
 import { falando_Denji } from "./personagens/irDenji.js";
 const irDenji = document.querySelector("#irPara_Denji");

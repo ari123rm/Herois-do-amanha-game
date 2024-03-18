@@ -43,7 +43,7 @@ export function falando_Denji(){
     sprites.style.display = "flex";
     barraHP.style.height = ` ${(jogador().vida)/ (jogador().lvl * (10 + jogador().modCon))*100}%`;
     barraREPvalue.style.width = `${denji.reputation}%`;
-    //setando reputação
+    //setando reputação para muie
     if(jogador().genero == "F")reputacao(25);
     //primeira interação
     mudarFala("RAN DAM DAM DAM DAM");
@@ -707,7 +707,11 @@ function bater(){
     denjiBate();
 }
 function esquivar(){
-     
+    if(jogador().roll("Dex") >= dado(20) + denji.getMod(denji.inv[0].attribute) + Math.floor(denji.lvl/2)  ){
+        mudarFala("Maldito esquivou de mim!");
+    }else{
+        denjiBate();
+    }
 }
 
 
