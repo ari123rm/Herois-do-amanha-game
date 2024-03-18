@@ -29,7 +29,7 @@
 }
 
 #jogo{
-    display: flex; /* flex;*/
+    display: none; /* flex;*/
 
     width: 1080px;
     height: 720px;
