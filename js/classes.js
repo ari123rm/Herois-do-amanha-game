@@ -300,6 +300,10 @@ class Armadura{
         return this.#tipo;
     }
 
+    toString(){
+        return `${this.name} | ${this.protecao} | ${this.value} | ${this.type}`;
+    }
+
 }
 class Npc extends Personagem{
     #reputacao

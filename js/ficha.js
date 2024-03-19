@@ -19,6 +19,8 @@ const inv_itensOL = document.querySelectorAll("#inv-itens li");
 const inv_arma = document.querySelectorAll(".inv-arma");
 const inv_itens_subir = document.querySelectorAll(".inv-itens-subir");
 const inv_itens_descer = document.querySelectorAll(".inv-itens-descer");
+
+const inv_itens_armadura = document.querySelector("#inv-item-armadura")
 //funções auxiliares
 function escrevendo(html,texto){
     html.innerText = texto;
@@ -47,7 +49,7 @@ function subir(index){
 }
 
 function descer(index){
-    if(index < 6){
+    if(index < 4){
         let temp = jogador().inv[index];
         jogador().inv[index] = jogador().inv[index +1];
         jogador().inv[index + 1] = temp;
@@ -87,4 +89,5 @@ export function criarFicha(){
             descer(index);
         }
     })
+    inv_itens_armadura.innerText = jogador().invArmaduras[0].toString();
 }

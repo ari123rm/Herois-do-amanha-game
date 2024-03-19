@@ -23,7 +23,10 @@ const lojaButtonArmas = document.querySelectorAll(".loja-itens-armas .loja-butto
 const lojaButtonArmaduras= document.querySelectorAll(".loja-itens-armaduras .loja-button-compraVenda");
 
 const compraVenda = document.querySelector("#loja-vender");
-lojaSair.onclick = leave;
+lojaSair.onclick = () =>{ 
+    clearInterval(verificaCompraVenda);
+    leave();
+};
 //funções auxiliares
 
 
@@ -31,7 +34,12 @@ lojaSair.onclick = leave;
 
 
 //função principal
+let verificaCompraVenda;
 export function criarLoja(){
+    let checkBox = compraVenda.checked? true: false;
+   
+    
+    
     armasImagens.forEach((element,index) => {
         element.src = `./imagens/loja/itens/${guns[index].type}.png`;
     });
@@ -62,25 +70,46 @@ export function criarLoja(){
             compraVendaArmadura(index);
         }
     })
+    
+    verificaCompraVenda = setInterval(() =>{
+        checkBox = compraVenda.checked? true: false;
+        armasLoja.forEach((element,index)=>{
+            if(!checkBox){
+                element.style.display = buscarArma(guns[index])? "none":"block";
+            }else{
+                element.style.display = buscarArma(guns[index])? "block":"none";
+            }
+        })
+        armadurasLoja.forEach((element,index)=>{
+            if(!checkBox){
+                element.style.display = buscarArmadura(armors[index])? "none":"block";
+            }else{
+                element.style.display = buscarArmadura(armors[index])? "block":"none";
+            }
+        })
+        
+    },100)
+    
 
 }
 
-function buscarArma(array,item){
-    array.forEach((element) =>{
+function buscarArma(item){
+    let achou = false
+    jogador().inv.forEach((element) =>{
         if(element.type === item.type){
-            
-            return true;
+            achou = true;
         }
     })
-    return false;
+    return achou;
 }
-function buscarArmadura(array,item){
-    array.forEach((element) =>{
+function buscarArmadura(item){
+    let achou = false
+    jogador().invArmaduras.forEach((element) =>{
         if(element.name === item.name){
-            return true;
+            achou = true;
         }
     })
-    return false;
+    return achou;
 }
 function remover(array,item){
     array.forEach((element,index) => {
@@ -89,19 +118,22 @@ function remover(array,item){
         }
     });
 }
-
 function compraVendaArma(index){
     if(!compraVenda.checked ){
-    if(jogador().dinheiro >= guns[index].value ){
-        jogador().dinheiro -= guns[index].value;
-        jogador().inv.push(guns[index]);
-        alert(`${guns[index].type} comprado com sucesso!`);
-    }else{
-        alert("Saldo insuficiente");
-    }
+        if(jogador().inv.length <=4){
+            if(jogador().dinheiro >= guns[index].value ){
+                jogador().dinheiro -= guns[index].value;
+                jogador().inv.push(guns[index]);
+                alert(`${guns[index].type} comprado com sucesso!`);
+            }else{
+                alert("Saldo insuficiente");
+            }
+        }else{
+            alert("Você está sobrecarregado!");
+        }
     }else{
    
-        if(buscarArma(jogador().inv,guns[index])){
+        if(buscarArma(guns[index])){
             jogador().dinheiro += guns[index].value;
             remover(jogador().inv,guns[index]);
             alert(`${guns[index].type} vendido com sucesso!`);
@@ -113,24 +145,28 @@ function compraVendaArma(index){
     lojaDinheiro.innerText = jogador().dinheiro;
 }
 function compraVendaArmadura(index){
+   
     if(!compraVenda.checked ){
-    if(jogador().dinheiro >= armors[index].value ){
-        jogador().dinheiro -= armors[index].value;
-        jogador().invArmaduras.unshift(armors[index]);
-        alert(`${armors[index].name} comprado com sucesso!`);
-    }else{
-        alert("Saldo insuficiente");
-    }
+        if(jogador().invArmaduras.length <=1){
+            if(jogador().dinheiro >= armors[index].value ){
+                jogador().dinheiro -= armors[index].value;
+                jogador().invArmaduras.unshift(armors[index]);
+                alert(`${armors[index].name} comprado com sucesso!`);
+            }else{
+                alert("Saldo insuficiente");
+            }
+        }else{
+            alert("Você está sobrecarregado!");
+        }
     }else{
    
-        if(buscarArmadura(jogador().invArmaduras,armors[index])){
+        if(buscarArmadura(armors[index])){
             jogador().dinheiro += armors[index].value;
             remover(jogador().invArmaduras,armors[index]);
             alert(`${armors[index].name} vendido com sucesso!`);
         }else{
             alert("Item não pertence ao inventario")
         }
- 
     }
     lojaDinheiro.innerText = jogador().dinheiro;
 }

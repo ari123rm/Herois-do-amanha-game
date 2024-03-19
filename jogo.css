@@ -328,6 +328,20 @@
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
 }
+#inventario #inv-itens-armadura{
+    bottom: 25%;
+    right: 15%;
+    font-size: 22px;
+    width: 27%;
+    color: darkslategrey;
+}
+#inventario #inv-itens li{
+    margin-bottom: 4%;
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+}
+
 
 #barraHP{
     position: absolute;
