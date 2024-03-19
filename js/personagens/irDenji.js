@@ -298,9 +298,12 @@ function virouMulher(){
         mudarButoes(luta,luta,luta)
     }
 }
+let casados =false;
 function casamento(){
     if(jogador().roll("Car") >= denji.DT("Car") || (jogador().genero == "F" || generoBait == "F")){
+        reputacao(20);
         mudarSprite(6)
+        casados = true;
         mudarFala(`Eu, ${denji.nome}, aceito me casar com você`);
         mudarEscolhas("Agora que somos casados, precisamos acabar com o ART","Te enganei HAHAHAHAHA", `*Abraçar o ${denji.nome}(Sab)`);
         mudarButoes(herois,deuFora,ajuda);
@@ -380,7 +383,11 @@ function tirarBala(){
         if(denji.vida >= (denji.lvl * (10 + denji.modCon))){
             imagem_sprite_Denji.className = "";
             mudarSprite(2);
-            mudarFala(`Agora me sinto bem melhor :D, valeu ai! Mas preciso resolver umas coisas ainda *${denji.nome} se retira `);
+            if(casados){
+                mudarFala(`Muito obrigado meu chuchuzinho *${denji.nome} beija sua testa* mas o dever me chama *pose de superherói* adeus. . . . minha amada`);
+            }else{
+                mudarFala(`Agora me sinto bem melhor :D, valeu ai! Mas preciso resolver umas coisas ainda *${denji.nome} se retira `);
+            }
             mudarEscolhas("Sair","Sair","Sair");
             mudarButoes(sair,sair,sair);
         }
