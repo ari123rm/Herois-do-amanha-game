@@ -28,71 +28,6 @@ lojaSair.onclick = () =>{
     leave();
 };
 //funções auxiliares
-
-
-
-
-
-//função principal
-let verificaCompraVenda;
-export function criarLoja(){
-    let checkBox = compraVenda.checked? true: false;
-   
-    
-    
-    armasImagens.forEach((element,index) => {
-        element.src = `./imagens/loja/itens/${guns[index].type}.png`;
-    });
-    armadurasImagens.forEach((element,index) => {
-        element.src = `./imagens/loja/itens/${armors[index].name}.png`;
-    });
-    armasNome.forEach((element,index) =>{
-        element.innerText = guns[index].type;
-    })
-    armadurasNome.forEach((element,index) =>{
-        element.innerText = armors[index].name;
-    })
-    armasValue.forEach((element,index) =>{
-        element.innerText = `${guns[index].value}$ | ${guns[index].damage} | ${guns[index].attribute}`;
-    })
-    armadurasValue.forEach((element,index) =>{
-        element.innerText = `${armors[index].value}$ | ${armors[index].protecao} | ${armors[index].type}`;
-    })
-    lojaDinheiro.innerText = jogador().dinheiro;
-
-    lojaButtonArmas.forEach((element,index) =>{
-        element.onclick = () =>{
-            compraVendaArma(index);
-        }
-    })
-    lojaButtonArmaduras.forEach((element,index) =>{
-        element.onclick = () =>{
-            compraVendaArmadura(index);
-        }
-    })
-    
-    verificaCompraVenda = setInterval(() =>{
-        checkBox = compraVenda.checked? true: false;
-        armasLoja.forEach((element,index)=>{
-            if(!checkBox){
-                element.style.display = buscarArma(guns[index])? "none":"block";
-            }else{
-                element.style.display = buscarArma(guns[index])? "block":"none";
-            }
-        })
-        armadurasLoja.forEach((element,index)=>{
-            if(!checkBox){
-                element.style.display = buscarArmadura(armors[index])? "none":"block";
-            }else{
-                element.style.display = buscarArmadura(armors[index])? "block":"none";
-            }
-        })
-        
-    },100)
-    
-
-}
-
 function buscarArma(item){
     let achou = false
     jogador().inv.forEach((element) =>{
@@ -170,6 +105,65 @@ function compraVendaArmadura(index){
     }
     lojaDinheiro.innerText = jogador().dinheiro;
 }
+
+//função principal
+let verificaCompraVenda;
+export function criarLoja(){
+    let checkBox = compraVenda.checked? true: false;
+    armasImagens.forEach((element,index) => {
+        element.src = `./imagens/loja/itens/${guns[index].type}.png`;
+    });
+    armadurasImagens.forEach((element,index) => {
+        element.src = `./imagens/loja/itens/${armors[index].name}.png`;
+    });
+    armasNome.forEach((element,index) =>{
+        element.innerText = guns[index].type;
+    })
+    armadurasNome.forEach((element,index) =>{
+        element.innerText = armors[index].name;
+    })
+    armasValue.forEach((element,index) =>{
+        element.innerText = `${guns[index].value}$ | ${guns[index].damage} | ${guns[index].attribute}`;
+    })
+    armadurasValue.forEach((element,index) =>{
+        element.innerText = `${armors[index].value}$ | ${armors[index].protecao} | ${armors[index].type}`;
+    })
+    lojaDinheiro.innerText = jogador().dinheiro;
+
+    lojaButtonArmas.forEach((element,index) =>{
+        element.onclick = () =>{
+            compraVendaArma(index);
+        }
+    })
+    lojaButtonArmaduras.forEach((element,index) =>{
+        element.onclick = () =>{
+            compraVendaArmadura(index);
+        }
+    })
+    
+    verificaCompraVenda = setInterval(() =>{
+        checkBox = compraVenda.checked? true: false;
+        armasLoja.forEach((element,index)=>{
+            if(!checkBox){
+                element.style.display = buscarArma(guns[index])? "none":"block";
+            }else{
+                element.style.display = buscarArma(guns[index])? "block":"none";
+            }
+        })
+        armadurasLoja.forEach((element,index)=>{
+            if(!checkBox){
+                element.style.display = buscarArmadura(armors[index])? "none":"block";
+            }else{
+                element.style.display = buscarArmadura(armors[index])? "block":"none";
+            }
+        })
+        
+    },100)
+    
+
+}
+
+
 
 
 

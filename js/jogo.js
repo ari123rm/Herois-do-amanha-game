@@ -83,7 +83,7 @@ function abrindo_inventario (){
         if(mapaAnterior == "./imagens/mapaHerois2020.png") {
             mapa.style.display = "flex";
         }
-        if(loja.style.display == "none"){
+        if(mapaAnterior == "./imagens/loja/lojaCatalogo.png"){
             loja.style.display = "flex";
         }
         if(falaAberto){

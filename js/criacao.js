@@ -148,6 +148,14 @@ function build_prota(){
 }   
 criar_prota.onclick = build_prota;
 
+const testando = document.querySelector("#criar-teste");
+
+function teste(){
+    display_criacao.style.display = "none";
+    display_jogo.style.display = "flex";
+}
+testando.onclick = teste;
+//if(carregado)teste();
 //exporta o jogador (Teste ou Personagem Criado)
 export function jogador(){
     

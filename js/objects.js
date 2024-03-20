@@ -41,7 +41,7 @@ const john_holly = new Npc("John Holly",10,[16,14,10,11,12,14],"M",[fuzil],[roup
 export {denji,simon,john_holly};
 
 //Personagem TESTE
-const teste = new Save("Teste",7,[10,10,10,10,10,10],"M",[mao,arco,motosserra,fuzil],[roupa]);
+const teste = new Save("Teste",7,[10,16,16,10,10,10],"N",[mao,arco,motosserra,fuzil],[roupa]);
 teste.dinheiro = 100000;
 
 export {teste};

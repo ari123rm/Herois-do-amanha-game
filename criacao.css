@@ -65,19 +65,21 @@ html{
     font-family: sans-serif;
     color:black;
     font-size: 16px;
+    cursor:pointer;
 }
 #criacao-de-personagem #atributoSecundario{
     width: max-content;
     position: absolute;
     top: 27%;
     right: 20%;
+    cursor:pointer;
     font-family: sans-serif;
     color:black;
     font-size: 16px;
     
 }
 #criacao-de-personagem #atributoGenero{
-   
+    cursor:pointer;
     width: max-content;
     position: absolute;
     top: 20%;
@@ -156,6 +158,7 @@ html{
     font-size: 16px;
     height: min-content ;
     width: 15%;
+    cursor:pointer;
     margin-top: 5px;
 }
 #criacao-de-personagem #local-butao-criar-prota{
@@ -165,9 +168,11 @@ html{
     bottom: 5.7%;;
     display: flex;
     justify-content: center;
+    
 }
 #criacao-de-personagem #criar-prota{
     position: absolute;
+    cursor:pointer;
     width: 30%;
     font-size: xx-large;
     justify-self: center;
@@ -180,6 +185,20 @@ html{
 #criacao-de-personagem #criar-prota:hover{
     background-color: goldenrod;
 }
+#criar-teste{
+    position: absolute;
+    width: 30%;
+    font-size: xx-large;
+    justify-self: center;
+    background-color: orangered;
+    color: white;
+    font-weight: bolder;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    bottom: 0;
+    cursor:pointer;
+    right:35%;
+}
 @media (max-width:1080px ) {
     #jogo , #criacao-de-personagem{
         transform: scale(0.3);
@@ -191,3 +210,4 @@ html{
     }
     
 }
+

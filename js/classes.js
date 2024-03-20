@@ -96,7 +96,7 @@ class Personagem{
         return this.#gender;
     }
     get armor(){
-        switch(this.invArmaduras[0].tipo){
+        switch(this.invArmaduras[0].type){
             case 'N':
                 return this.invArmaduras[0].protecao + this.modDex;
                 break;
@@ -336,6 +336,7 @@ class Save extends Personagem{
 }
 
 export {Personagem,Arma,Save,Npc,Armadura};
+
 function dado(max) {
     return Math.floor(Math.random() * (max)) + 1;
 }

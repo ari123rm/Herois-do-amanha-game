@@ -724,7 +724,10 @@ function esquivar(){
 
 function sair(){
     clearInterval(verificandoReputacao)
-    jogador().progress = {nome:`${denji.nome}`, rep: denji.reputation};
+    jogador().progress = {
+        nome:`${denji.nome}`, 
+        rep: denji.reputation
+    };
     irDenji.style.display = "none";
     leave();
 }
