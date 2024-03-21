@@ -157,16 +157,6 @@ if(savesRecebidos[localStorage.getItem('saveEscolhido')] != undefined){
     display_jogo.style.display = "flex";
 }
 
-
-
-
-const testando = document.querySelector("#criar-teste");
-
-function teste(){
-    display_criacao.style.display = "none";
-    display_jogo.style.display = "flex";
-}
-testando.onclick = teste;
 //if(carregado)teste();
 //exporta o jogador (Teste ou Personagem Criado)
 export function jogador(){
