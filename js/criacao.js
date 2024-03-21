@@ -103,9 +103,9 @@ const display_jogo = document.querySelector("#jogo");
 const inv_nome = document.querySelector("#inv-nome");
 const barraHpNome = document.querySelector("#barraHP p");
 
-//prota teste
+
 import * as objetos from "./objects.js";
-const protagonista = [objetos.teste];
+const protagonista = [];
 //função para criar o personagem jogavel
 function build_prota(){
     if(atributoPrincipal.value != "selecionePricipal" && atributoSecundario.value != "selecioneSecundario"  && nick.value != "" && atributoGenero.value != "selecioneGenero"){
@@ -147,6 +147,18 @@ function build_prota(){
     }
 }   
 criar_prota.onclick = build_prota;
+
+//carregar save
+import { savesRecebidos } from "./load.js";
+console.log(savesRecebidos[localStorage.getItem('saveEscolhido')]);
+if(savesRecebidos[localStorage.getItem('saveEscolhido')] != undefined){
+    protagonista.push(savesRecebidos[localStorage.getItem('saveEscolhido')]);
+    display_criacao.style.display = "none";
+    display_jogo.style.display = "flex";
+}
+
+
+
 
 const testando = document.querySelector("#criar-teste");
 

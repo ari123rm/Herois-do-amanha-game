@@ -209,7 +209,6 @@ class Personagem{
         this.vida += value;
         if(this.vida >=  this.lvl*(10 + this.modCon)) this.vida = this.lvl*(10 + this.modCon);
     }
-
 }
 class Arma{
 
